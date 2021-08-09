@@ -1,0 +1,9 @@
+package-lock.json
+node_modules
+.vscode
+allure-results
+jest_html_reporters.html
+.DS_Store
+exampleFailed.png
+report.html
+output

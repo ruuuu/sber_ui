@@ -1,0 +1,97 @@
+stages:
+  #- deploy   
+  - test
+  - history_copy
+  - report
+  - info
+  - notifysuccess
+  - notifyerror
+
+# вызов через апи
+# trigger_build:
+#   stage: deploy
+#   script:                    
+#     - "curl -X POST -F token='e7da2525e4c6250a7968e212c77239' -F ref=tests https://gitlab.com/api/v4/projects/9096799/trigger/pipeline"  
+
+
+API_branch:
+  stage: test
+  image:
+    name: mcr.microsoft.com/playwright:bionic
+  before_script:
+    - npm install
+  script:
+    - npm test
+  allow_failure: true
+  artifacts:    
+    when: always    
+    paths:      
+      - ./report.html
+      - ./output
+    expire_in: 1 day
+
+#----------
+
+history_job:
+  stage: history_copy
+  tags:
+    - docker
+  image: storytel/alpine-bash-curl
+  script:
+    - 'curl --location --output artifacts.zip "https://gitlab.com/api/v4/projects/24215686/jobs/artifacts/master/download?job=pages&job_token=$CI_JOB_TOKEN"'
+    - apk add unzip
+    - unzip artifacts.zip
+    - chmod -R 777 public
+    - cp -r ./public/history ./output
+  allow_failure: true
+  artifacts: 
+    paths:
+      - ./output
+    expire_in: 1 day
+  rules:
+    - when: always
+
+
+#----------
+
+allure_job:
+  stage: report
+  image: frankescobar/allure-docker-service
+  script:
+    - allure generate -c ./output -o ./allure-report 
+  artifacts:
+    paths:
+      - ./output
+      - ./allure-report  #
+    expire_in: 1 day
+  rules:
+    - when: always
+    
+
+
+pages: 
+  stage: info 
+  script:    
+    - mkdir public    
+    - mv ./report.html public 
+    - mv ./allure-report/* public  
+  artifacts:    
+    paths:      
+      - public  
+  rules:
+    - when: always 
+
+
+notify_success:
+  stage: notifysuccess
+  script:
+    - sh .notify.sh ✅  
+  when: on_success
+
+
+notify_error:
+  stage: notifyerror
+  script:
+    - sh .notify.sh ❌
+  when: on_failure 
+
