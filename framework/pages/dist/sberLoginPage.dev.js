@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SberLoginPage = void 0;
+exports.loginPage = void 0;
 
-var SberLoginPage = function SberLoginPage() {
+var loginPage = function loginPage() {
   var loginField = '[data-field-name="login"]';
   var passwordField = '[data-field-name="password"]';
   var loginButton = 'button'; // кнопка Войти
@@ -41,4 +41,4 @@ var SberLoginPage = function SberLoginPage() {
   };
 };
 
-exports.SberLoginPage = SberLoginPage;
+exports.loginPage = loginPage;

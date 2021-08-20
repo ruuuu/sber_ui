@@ -6,9 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.DataGenerate = void 0;
 
 var DataGenerate = function DataGenerate() {
-  //
-  var data = [// массив объектов
-  {
+  var data = [{
     email: 'sberbank',
     password: 'sberbank'
   }, {
@@ -30,7 +28,6 @@ var ArrayInnYrLiso = function ArrayInnYrLiso() {
 };
 
 var ArrayInnIp = function ArrayInnIp() {
-  //
   var arrayIpInn = []; // массив ИНН для  ИП
 
   return arrayIpInn;

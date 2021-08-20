@@ -1,6 +1,6 @@
-const DataGenerate = function(){  //
+const DataGenerate = function(){  
 
-  const data = [ // массив объектов
+  const data = [ 
     {
       email: 'sberbank', 
       password: 'sberbank',
@@ -26,7 +26,7 @@ const ArrayInnYrLiso = function(){
   return arrayYrLisoInn;
 }
 
-const ArrayInnIp = function(){  //
+const ArrayInnIp = function(){  
   const arrayIpInn = []; // массив ИНН для  ИП
 
   return arrayIpInn;
