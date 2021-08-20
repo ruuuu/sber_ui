@@ -12,11 +12,10 @@ var CreateTaxpayerPage = function CreateTaxpayerPage() {
 
   var checkButton = 'form>div>div:nth-child(2)>button'; //  кнопка  Найти(check)
 
-  var prodolgitButton = 'text="Продолжить"'; // кнопка Продолжить, нашел по надписи на кнпоке
+  var prodolgitButton = 'text="Продолжить"'; // кнопка Продолжить
 
   var requests = 'html>body>div>div>div>div>div:nth-child(2)>div>div:nth-child(2)>div>div:nth-child(2)'; // вкладка Запросы
-
-  var alreadyExistInn = 'html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>div'; // красное сообщение что ИНН уже есть
+  // const alreadyExistInn = ('html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>div'); // красное сообщение что ИНН уже есть
 
   this.createTaxpayer = function _callee(page, inn) {
     return regeneratorRuntime.async(function _callee$(_context) {
@@ -39,10 +38,6 @@ var CreateTaxpayerPage = function CreateTaxpayerPage() {
             return regeneratorRuntime.awrap(page.click(prodolgitButton));
 
           case 8:
-            _context.next = 10;
-            return regeneratorRuntime.awrap(page.click(requests));
-
-          case 10:
           case "end":
             return _context.stop();
         }
