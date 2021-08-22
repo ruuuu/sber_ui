@@ -10,7 +10,7 @@ var FilterSearchPage = function FilterSearchPage() {
 
   var searchInnField = '[placeholder="Введите ИНН"]'; // поле поиска по ИНН
 
-  var requests = 'html>body>div>div>div>div>div:nth-child(2)>div>div:nth-child(2)>div>div:nth-child(2)'; // вкладка Запросы
+  var requests = 'text="Запросы"'; // вкладка Запросы
 
   var filterButtonForInnAtTaxpayers = 'table>thead>tr>th:nth-child(1)>div>div>div:nth-child(2)>div:nth-child(2)>div'; // треугольничек для фильтра по инн на вкладке НП
 
@@ -18,6 +18,14 @@ var FilterSearchPage = function FilterSearchPage() {
   var applyButton = 'text="Применить"'; // кнопка Применить
 
   var filterButtonForInnAtRequests = 'table>thead>tr>th:nth-child(4)>div>div>div:nth-child(2)>div:nth-child(2)'; // треугольничек для фильра по инн на вкладке Запросы
+
+  var filterButtonForStatusAtRequests = 'table>thead>tr>th:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(2)'; //  треугольничек для фильтра по статусу на вкладке Запросы
+
+  var statusCheckbox = 'html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>label>div:nth-child(2)'; //input[type="checkbox"]
+  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
+  // /html/body/div[2]/div/div/div[2]/div[2]/label/div[2]
+  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[1]
+  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
 
   this.searchTaxpayerByInnAtTaxpayers = function _callee(page, inn) {
     return regeneratorRuntime.async(function _callee$(_context) {
@@ -49,13 +57,17 @@ var FilterSearchPage = function FilterSearchPage() {
 
           case 2:
             _context2.next = 4;
-            return regeneratorRuntime.awrap(page.fill(innFiled, inn));
+            return regeneratorRuntime.awrap(page.fill(innFiled, ''));
 
           case 4:
             _context2.next = 6;
-            return regeneratorRuntime.awrap(page.click(applyButton));
+            return regeneratorRuntime.awrap(page.fill(innFiled, inn));
 
           case 6:
+            _context2.next = 8;
+            return regeneratorRuntime.awrap(page.click(applyButton));
+
+          case 8:
           case "end":
             return _context2.stop();
         }
@@ -115,7 +127,7 @@ var FilterSearchPage = function FilterSearchPage() {
     });
   };
 
-  this.filterTaxpayerByStatusAtRequests = function _callee5(page, inn) {
+  this.filterByStatusAtRequests = function _callee5(page) {
     return regeneratorRuntime.async(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
@@ -125,17 +137,13 @@ var FilterSearchPage = function FilterSearchPage() {
 
           case 2:
             _context5.next = 4;
-            return regeneratorRuntime.awrap(page.click());
+            return regeneratorRuntime.awrap(page.click(filterButtonForStatusAtRequests));
 
           case 4:
             _context5.next = 6;
-            return regeneratorRuntime.awrap(page.fill());
+            return regeneratorRuntime.awrap(page.click(statusCheckbox));
 
           case 6:
-            _context5.next = 8;
-            return regeneratorRuntime.awrap(page.click(applyButton));
-
-          case 8:
           case "end":
             return _context5.stop();
         }

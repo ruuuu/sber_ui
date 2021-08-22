@@ -2,7 +2,7 @@ const FilterSearchPage = function() {
 
   const poiskButton = ('div>div>div>div:nth-child(1)>div>div:nth-child(4)>div>div'); // кнпока Лупа
   const searchInnField = ('[placeholder="Введите ИНН"]'); // поле поиска по ИНН
-  const requests = ('html>body>div>div>div>div>div:nth-child(2)>div>div:nth-child(2)>div>div:nth-child(2)'); // вкладка Запросы
+  const requests = ('text="Запросы"'); // вкладка Запросы
   
   const filterButtonForInnAtTaxpayers = ('table>thead>tr>th:nth-child(1)>div>div>div:nth-child(2)>div:nth-child(2)>div'); // треугольничек для фильтра по инн на вкладке НП
   const innFiled = ('[placeholder = "Найти..."]'); 
@@ -10,9 +10,15 @@ const FilterSearchPage = function() {
 
   const filterButtonForInnAtRequests = ('table>thead>tr>th:nth-child(4)>div>div>div:nth-child(2)>div:nth-child(2)');// треугольничек для фильра по инн на вкладке Запросы
 
-  
+  const filterButtonForStatusAtRequests = ('table>thead>tr>th:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(2)'); //  треугольничек для фильтра по статусу на вкладке Запросы
 
+  const statusCheckbox = ('html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>label>div:nth-child(2)');
+  //input[type="checkbox"]
 
+  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
+  // /html/body/div[2]/div/div/div[2]/div[2]/label/div[2]
+  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[1]
+  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
 
 
 
@@ -30,6 +36,7 @@ const FilterSearchPage = function() {
     
     await page.click(filterButtonForInnAtTaxpayers); // на треугольничек жмем
 
+    await page.fill(innFiled, '');  // очищвем поле
     await page.fill(innFiled, inn); 
 
     await page.click(applyButton);  // жмем Применить
@@ -64,16 +71,22 @@ const FilterSearchPage = function() {
 
 
 
-  this.filterTaxpayerByStatusAtRequests = async function (page, inn){  // фильтр по Статусу на вкладке Запросы
+  
+
+
+  this.filterByStatusAtRequests = async function (page){  // фильтр по Статусу на вкладке Запросы, пока ене получилось
 
     await page.click(requests); // переходим на  вкладку Запросы
 
-    await page.click(); 
+    await page.click(filterButtonForStatusAtRequests); // жмем на треугльник статуса
 
-    await page.fill(); 
-
-    await page.click(applyButton);  // жмем Применить
+    // const statusArray = ['Подтвержден', 'Ошибка', 'Обработка', 'Отклонен'];
+    // const randStatusIndex = Math.floor(Math.random() * statusArray.length); // берем рандомный статус
+    // console.log('randStatusIndex ', randStatusIndex);
     
+    
+    //await page.check(statusCheckbox);   // жмем чекбокс
+    await page.click(statusCheckbox);
   };
 
 
