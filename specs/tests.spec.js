@@ -21,40 +21,24 @@ afterEach(async () => {
 
 
 
-it.only('Создание НП-10 значный', async () => {
+it('Создание НП-10 значный', async () => {
 
     const email = await app().data()[0].email; 
 
     const password = await app().data()[0].password;
 
-    let inn = '5074018058'; // Рандомно выбирать потом из массива 10- значных
-
     await app().loginPage().login(page, email, password); 
 
-    
-    await app().filterSearchPage().filterTaxpayerByInnAtTaxpayers(page, inn); // вызов метода фильтрации
+    const masInn = ['4252009714'];  // массив УНИКАЛЬНЫХ рандомных инн
+    let index = Math.floor(Math.random() * masInn.length); // 
+    console.log('index: ', index);
 
-    const innCell = await app().locatorPage().getLocator('table>tbody>tr>td:nth-child(1)>span'); // в гриде НП, ячейка где хранится ИНН 
-    const innCellText = await app().locatorPage().getElement(page, innCell); // значение инн в ячейке
+    let inn = masInn[index]; // рандомный инн 
+    console.log('рандомный inn: ', inn);
 
-
-    const masInn = ['2465102947', '3444197900', '2466126411', '1102069910', '2636208110']; 
-    while(innCellText === inn){ // если такой инн уже есть в системе
-        
-        const index = Math.floor(Math.random() * masInn.length);
-        console.log('index: ', index);
-        inn = masInn[index]; 
-        console.log('inn: ', inn); 
-        await app().filterSearchPage().filterTaxpayerByInnAtTaxpayers(page, inn); // вызов метода фильтрации
-        const innCell = await app().locatorPage().getLocator('table>tbody>tr>td:nth-child(1)>span'); // в гриде НП, ячейка где хранится ИНН 
-        const innCellText = await app().locatorPage().getElement(page, innCell); // значение инн в ячейке
-
-    }
-
-    // const resetFilter = ('text="Очистить фильтры"');
-    // await page.click(resetFilter);
-  
     await app().createTaxpayerPage().createTaxpayer(page, inn); // вызываем метод создания НП
+
+
 
 
     // ИНН:                    
@@ -65,14 +49,11 @@ it.only('Создание НП-10 значный', async () => {
       .have
       .string(inn); 
 
-
-    // Статус:  
-    const cellStatus = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); // в гриде, на вкладке Зарпосы, ячейка где хранится Статус   
-    const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
-    expect(cellStatusText)
-      .to
-      .have
-      .string('Подтвержден'); 
+    
+    await page.click('text="Запросы"');  //Кликаем по  вкладке Запросы
+    await page.waitForTimeout(12000); // ждет 12 сек
+    await page.click('text="Налогоплательщики"');  //Кликаем по  вкладке Налогоплательщики
+    await page.click('text="Запросы"');  //Кликаем по  вкладке Запросы
 
 
     // Активность:  
@@ -83,17 +64,36 @@ it.only('Создание НП-10 значный', async () => {
       .have
       .string('Запрос карты документов НП');   
 
+
+
+    // Статус:  
+    const cellStatus = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); // в гриде, на вкладке Зарпосы, ячейка где хранится Статус   
+    const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
+    expect(cellStatusText)
+      .to
+      .have
+      .string('Подтвержден'); 
+
 });
 
 
-// добавить тест для создания ИП (12 значный ИНН):
-it('Создание НП-12 значный', async () => {
+it('Создание НП-10 значный котырй уже есть в системе', async () => {
+
+});
+
+
+
+it('Создание НП-12 значный котырй уже есть в системе', async () => {
+
+});
+
+it.only('Создание НП-12 значный для сбера', async () => {// ОСТАНОВИЛАСЬ НА ЭТОМ 
 
     const email = await app().data()[0].email; 
 
     const password = await app().data()[0].password;
 
-    const inn = ''; // Рандомно выбирать потом из массива 12- значных
+    const inn = '010400067870'; // Рандомно выбирать потом из массива 12- значных УНИКАЛЬНЫХ
 
     await app().loginPage().login(page, email, password); 
     
@@ -248,5 +248,51 @@ it('Фильтр по ИНН на вкладке Запросы', async () => {
 });
 
 
+it('Фильтр по Статусу на вкладке Запросы', async () => { // пока не получается
+
+  
+
+  const email = await app().data()[0].email; 
+  const password = await app().data()[0].password;
+
+  await app().loginPage().login(page, email, password); // вызов метода login
+
+  await app().filterSearchPage().filterByStatusAtRequests(page); // вызов метода фильтрации пос татусу, пердаем стаутс
+  
+  
+  // const statusCell = await app().locatorPage().getLocator('table/tbody/tr[2]/td[2]/div/div'); // в гриде, на вкладке Запросы, ячейка где хранится Статус
+  // console.log('statusCell ', statusCell);
+  // const statusCellText = await app().locatorPage().getElement(page, statusCell);
+  // expect(statusCellText)
+  //   .to
+  //   .have
+  //   .string(randStatus);
+
+});
 
 
+
+
+// // table/tbody/tr[2]/td[2]/div/div
+// // table/tbody/tr[3]/td[2]/div/div
+// // table/tbody/tr[4]/td[2]/div/div
+// // 
+// let masStatuses = [];
+
+// for(let i=0; i< 10; i++){
+//   expect((table/tbody/tr[i]/td[2]/div/div).textContent)
+//     .to
+//     .have
+//     .string('Подтвержден');
+
+// }
+
+// // masStatuse = ['Потдвержден', 'Обработка', 'Подтвержедн'];
+
+// for(let i=0; i< 10; i++){
+//   if(masStatuse[i] === 'Подтвержден'){
+
+//   }
+
+
+// }
