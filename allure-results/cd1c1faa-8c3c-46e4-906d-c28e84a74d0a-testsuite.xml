@@ -1,0 +1,106 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1630957605169' stop='1630957610909'>
+    <name>specs/tests.spec.js</name>
+    <title>specs/tests.spec.js</title>
+    <test-cases>
+        <test-case start='1630957605169' status='undefined' stop='1630957605170'>
+            <name>Создание НП-10 значный</name>
+            <title>Создание НП-10 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957605170' status='undefined' stop='1630957605170'>
+            <name>Создание НП-12 значный</name>
+            <title>Создание НП-12 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957605170' status='failed' stop='1630957610893'>
+            <name>Создание НП, который уже есть в системе</name>
+            <title>Создание НП, который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>TypeError: Cannot read property 'length' of undefined</message>
+                <stack-trace>TypeError: Cannot read property 'length' of undefined
+                    at LoginPage.getAllInn (/Users/rufina/Desktop/sber_ui/framework/pages/loginPage.js:47:39)
+                    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+                    at Object.&lt;anonymous> (/Users/rufina/Desktop/sber_ui/specs/tests.spec.js:120:20)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957610893' status='undefined' stop='1630957610893'>
+            <name>Поиск по ИНН на вкладке НП</name>
+            <title>Поиск по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957610893' status='undefined' stop='1630957610893'>
+            <name>Поиск по ИНН на вкладке Запросы</name>
+            <title>Поиск по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957610893' status='undefined' stop='1630957610893'>
+            <name>Фильтр по ИНН на вкладке НП</name>
+            <title>Фильтр по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957610894' status='undefined' stop='1630957610894'>
+            <name>Фильтр по ИНН на вкладке Запросы</name>
+            <title>Фильтр по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630957610894' status='undefined' stop='1630957610894'>
+            <name>Фильтр по Статусу на вкладке Запросы</name>
+            <title>Фильтр по Статусу на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

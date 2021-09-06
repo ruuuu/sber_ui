@@ -15,11 +15,11 @@ var _locatorPage = require("./locatorPage");
 
 var _filterSearchPage = require("./filterSearchPage");
 
-var urlSber = 'https://sber.cprr-dev.weintegrator.com/login';
+var urlSber = 'https://sber.cprr-dev.weintegrator.com';
 exports.urlSber = urlSber;
-var urlVtb = 'https://vtb.cprr-dev.weintegrator.com/login';
+var urlVtb = 'https://vtb.cprr-dev.weintegrator.com';
 exports.urlVtb = urlVtb;
-var urlFns = 'https://fns.cprr-dev.weintegrator.com/login';
+var urlFns = 'https://fns.cprr-dev.weintegrator.com';
 exports.urlFns = urlFns;
 
 var app = function app() {
@@ -37,7 +37,7 @@ var app = function app() {
       return new _filterSearchPage.FilterSearchPage();
     },
     data: function data() {
-      return new _data.DataGenerate();
+      return new _data.dataGenerate();
     }
   };
 };

@@ -1,0 +1,138 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1630953276439' stop='1630953326240'>
+    <name>specs/tests.spec.js</name>
+    <title>specs/tests.spec.js</title>
+    <test-cases>
+        <test-case start='1630953276439' status='undefined' stop='1630953276440'>
+            <name>Создание НП-10 значный</name>
+            <title>Создание НП-10 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953276440' status='failed' stop='1630953326216'>
+            <name>Создание НП-12 значный</name>
+            <title>Создание НП-12 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Expected value   undefined
+                Received:
+                  "Обработка"
+                
+                Message:
+                  expected 'Обработка' to contain 'Подтвержден'
+                
+                Difference:
+                
+                  Comparing two different types of values. Expected undefined but received string.
+                    at Object.&lt;anonymous> (/Users/rufina/Desktop/sber_ui/specs/tests.spec.js:113:8)</message>
+                <stack-trace>Error: Expected value   undefined
+                Received:
+                  "Обработка"
+                
+                Message:
+                  expected 'Обработка' to contain 'Подтвержден'
+                
+                Difference:
+                
+                  Comparing two different types of values. Expected undefined but received string.
+                    at Object.&lt;anonymous> (/Users/rufina/Desktop/sber_ui/specs/tests.spec.js:113:8)
+                    at Env.fail (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmine/Env.js:722:61)
+                    at Function.next.fail (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/queueRunner.js:40:22)
+                    at /Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:120:18</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Создание НП-10 значный который уже есть в системе</name>
+            <title>Создание НП-10 значный который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Создание НП-12 значный который уже есть в системе</name>
+            <title>Создание НП-12 значный который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Поиск по ИНН на вкладке НП</name>
+            <title>Поиск по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Поиск по ИНН на вкладке Запросы</name>
+            <title>Поиск по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Фильтр по ИНН на вкладке НП</name>
+            <title>Фильтр по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Фильтр по ИНН на вкладке Запросы</name>
+            <title>Фильтр по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953326217' status='undefined' stop='1630953326217'>
+            <name>Фильтр по Статусу на вкладке Запросы</name>
+            <title>Фильтр по Статусу на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

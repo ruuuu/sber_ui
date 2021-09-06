@@ -2,7 +2,7 @@ const FilterSearchPage = function() {
 
   const poiskButton = ('div>div>div>div:nth-child(1)>div>div:nth-child(4)>div>div'); // кнпока Лупа
   const searchInnField = ('[placeholder="Введите ИНН"]'); // поле поиска по ИНН
-  const requests = ('text="Запросы"'); // вкладка Запросы
+  const requests = ('text="Заявки на получение сведений"'); // вкладка Запросы
   
   const filterButtonForInnAtTaxpayers = ('table>thead>tr>th:nth-child(1)>div>div>div:nth-child(2)>div:nth-child(2)>div'); // треугольничек для фильтра по инн на вкладке НП
   const innFiled = ('[placeholder = "Найти..."]'); 

@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DataGenerate = void 0;
+exports.arrayInnIP = exports.arrayInnYrLiso = exports.dataGenerate = void 0;
 
-var DataGenerate = function DataGenerate() {
+var dataGenerate = function dataGenerate() {
   var data = [{
     email: 'sberbank',
     password: 'sberbank'
@@ -19,16 +19,20 @@ var DataGenerate = function DataGenerate() {
   return data;
 };
 
-exports.DataGenerate = DataGenerate;
+exports.dataGenerate = dataGenerate;
 
-var ArrayInnYrLiso = function ArrayInnYrLiso() {
-  var arrayYrLisoInn = []; // массив ИНН для  юр лиц, брать отсюда https://rmsp-pp.nalog.ru/search.html?m=Support#t=1628447669165&sk=UL 
+var arrayInnYrLiso = function arrayInnYrLiso() {
+  var arrayYrLisoInn = ['1659121320', '1661031994']; // массив ИНН для  юр лиц(10-значные)
 
   return arrayYrLisoInn;
 };
 
-var ArrayInnIp = function ArrayInnIp() {
-  var arrayIpInn = []; // массив ИНН для  ИП
+exports.arrayInnYrLiso = arrayInnYrLiso;
+
+var arrayInnIP = function arrayInnIP() {
+  var arrayIpInn = ['100101078951', '600100736489', '100106366738']; // массив ИНН для  ИП(12-ти значные)
 
   return arrayIpInn;
 };
+
+exports.arrayInnIP = arrayInnIP;

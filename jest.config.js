@@ -6,7 +6,7 @@ module.exports = {
       {
         filename: 'report.html',
         expand: true,
-        pageTitle: 'TPFReport'
+        pageTitle: 'AomiReport'
       }
     ]
   ],
@@ -17,7 +17,7 @@ module.exports = {
   },
   testMatch: ['**/specs/*.spec.*'] , // ['**/specs/*.spec.*']
   globals: {
-    testTimeout: 50000,
+    testTimeout: 30000,
   },
   verbose: true,
   setupFilesAfterEnv: ["jest-allure/dist/setup"]

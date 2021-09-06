@@ -1,0 +1,125 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1630953115602' stop='1630953172066'>
+    <name>specs/tests.spec.js</name>
+    <title>specs/tests.spec.js</title>
+    <test-cases>
+        <test-case start='1630953115602' status='undefined' stop='1630953115603'>
+            <name>Создание НП-10 значный</name>
+            <title>Создание НП-10 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953115603' status='failed' stop='1630953172026'>
+            <name>Создание НП-12 значный</name>
+            <title>Создание НП-12 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>: Timeout - Async callback was not invoked within the 50000 ms timeout specified by jest.setTimeout.</message>
+                <stack-trace>Timeout - Async callback was not invoked within the 50000 ms timeout specified by jest.setTimeout.Error: 
+                    at new Spec (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmine/Spec.js:116:22)
+                    at new Spec (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/setup_jest_globals.js:78:9)
+                    at specFactory (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmine/Env.js:523:24)
+                    at Env.fit (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmine/Env.js:641:24)
+                    at Env.fit (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmineAsyncInstall.js:134:23)
+                    at Function.only (/Users/rufina/Desktop/sber_ui/node_modules/jest-jasmine2/build/jasmine/jasmineLight.js:108:22)
+                    at Object.&lt;anonymous> (/Users/rufina/Desktop/sber_ui/specs/tests.spec.js:82:4)
+                    at Runtime._execModule (/Users/rufina/Desktop/sber_ui/node_modules/jest-runtime/build/index.js:1299:24)
+                    at Runtime._loadModule (/Users/rufina/Desktop/sber_ui/node_modules/jest-runtime/build/index.js:898:12)
+                    at Runtime.requireModule (/Users/rufina/Desktop/sber_ui/node_modules/jest-runtime/build/index.js:746:10)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172026' status='undefined' stop='1630953172027'>
+            <name>Создание НП-10 значный который уже есть в системе</name>
+            <title>Создание НП-10 значный который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172027' status='undefined' stop='1630953172027'>
+            <name>Создание НП-12 значный который уже есть в системе</name>
+            <title>Создание НП-12 значный который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172027' status='undefined' stop='1630953172027'>
+            <name>Поиск по ИНН на вкладке НП</name>
+            <title>Поиск по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172027' status='undefined' stop='1630953172027'>
+            <name>Поиск по ИНН на вкладке Запросы</name>
+            <title>Поиск по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172027' status='undefined' stop='1630953172027'>
+            <name>Фильтр по ИНН на вкладке НП</name>
+            <title>Фильтр по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172027' status='undefined' stop='1630953172027'>
+            <name>Фильтр по ИНН на вкладке Запросы</name>
+            <title>Фильтр по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630953172027' status='undefined' stop='1630953172027'>
+            <name>Фильтр по Статусу на вкладке Запросы</name>
+            <title>Фильтр по Статусу на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

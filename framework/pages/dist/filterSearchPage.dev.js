@@ -10,7 +10,7 @@ var FilterSearchPage = function FilterSearchPage() {
 
   var searchInnField = '[placeholder="Введите ИНН"]'; // поле поиска по ИНН
 
-  var requests = 'text="Запросы"'; // вкладка Запросы
+  var requests = 'text="Заявки на получение сведений"'; // вкладка Запросы
 
   var filterButtonForInnAtTaxpayers = 'table>thead>tr>th:nth-child(1)>div>div>div:nth-child(2)>div:nth-child(2)>div'; // треугольничек для фильтра по инн на вкладке НП
 

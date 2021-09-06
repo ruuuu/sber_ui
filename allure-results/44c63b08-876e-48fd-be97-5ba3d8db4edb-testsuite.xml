@@ -1,0 +1,141 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1630955540370' stop='1630955564161'>
+    <name>specs/tests.spec.js</name>
+    <title>specs/tests.spec.js</title>
+    <test-cases>
+        <test-case start='1630955540370' status='undefined' stop='1630955540371'>
+            <name>Создание НП-10 значный</name>
+            <title>Создание НП-10 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955540371' status='undefined' stop='1630955540371'>
+            <name>Создание НП-12 значный</name>
+            <title>Создание НП-12 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955540371' status='failed' stop='1630955564139'>
+            <name>Создание НП, который уже есть в системе</name>
+            <title>Создание НП, который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>Error: page.waitForSelector: Evaluation failed: DOMException: Failed to execute 'querySelectorAll' on 'Document': 'div[1]' is not a valid selector.
+                    at query (&lt;anonymous>:2445:49)
+                    at &lt;anonymous>:2455:13
+                    at SelectorEvaluatorImpl._cached (&lt;anonymous>:2251:24)
+                    at SelectorEvaluatorImpl._queryCSS (&lt;anonymous>:2442:21)
+                    at SelectorEvaluatorImpl._querySimple (&lt;anonymous>:2321:25)
+                    at &lt;anonymous>:2280:33
+                    at SelectorEvaluatorImpl._cached (&lt;anonymous>:2251:24)
+                    at SelectorEvaluatorImpl.query (&lt;anonymous>:2274:21)
+                    at Object.query (&lt;anonymous>:2478:50)
+                    at &lt;anonymous>:2435:27
+                =========================== logs ===========================
+                waiting for selector "body>div[2]>div>div>div[2]>div[1]" to be visible
+                ============================================================
+                Note: use DEBUG=pw:api environment variable and rerun to capture Playwright logs.</message>
+                <stack-trace>page.waitForSelector: Evaluation failed: DOMException: Failed to execute 'querySelectorAll' on 'Document': 'div[1]' is not a valid selector.
+                    at query (&lt;anonymous>:2445:49)
+                    at &lt;anonymous>:2455:13
+                    at SelectorEvaluatorImpl._cached (&lt;anonymous>:2251:24)
+                    at SelectorEvaluatorImpl._queryCSS (&lt;anonymous>:2442:21)
+                    at SelectorEvaluatorImpl._querySimple (&lt;anonymous>:2321:25)
+                    at &lt;anonymous>:2280:33
+                    at SelectorEvaluatorImpl._cached (&lt;anonymous>:2251:24)
+                    at SelectorEvaluatorImpl.query (&lt;anonymous>:2274:21)
+                    at Object.query (&lt;anonymous>:2478:50)
+                    at &lt;anonymous>:2435:27
+                =========================== logs ===========================
+                waiting for selector "body>div[2]>div>div>div[2]>div[1]" to be visible
+                ============================================================
+                Note: use DEBUG=pw:api environment variable and rerun to capture Playwright logs.: 
+                    at Connection.sendMessageToServer (/Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/connection.js:69:15)
+                    at Proxy.&lt;anonymous> (/Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/channelOwner.js:44:61)
+                    at /Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/frame.js:180:48
+                    at Frame._wrapApiCall (/Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/channelOwner.js:72:34)
+                    at Frame.waitForSelector (/Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/frame.js:175:21)
+                    at /Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/page.js:215:60
+                    at Page._attributeToPage (/Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/page.js:205:20)
+                    at Page.waitForSelector (/Users/rufina/Desktop/sber_ui/node_modules/playwright/lib/client/page.js:215:21)
+                    at LocatorPage.getElement (/Users/rufina/Desktop/sber_ui/framework/pages/locatorPage.js:11:18)
+                    at Object.&lt;anonymous> (/Users/rufina/Desktop/sber_ui/specs/tests.spec.js:131:50)</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955564139' status='undefined' stop='1630955564139'>
+            <name>Поиск по ИНН на вкладке НП</name>
+            <title>Поиск по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955564139' status='undefined' stop='1630955564139'>
+            <name>Поиск по ИНН на вкладке Запросы</name>
+            <title>Поиск по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955564140' status='undefined' stop='1630955564140'>
+            <name>Фильтр по ИНН на вкладке НП</name>
+            <title>Фильтр по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955564140' status='undefined' stop='1630955564140'>
+            <name>Фильтр по ИНН на вкладке Запросы</name>
+            <title>Фильтр по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1630955564140' status='undefined' stop='1630955564140'>
+            <name>Фильтр по Статусу на вкладке Запросы</name>
+            <title>Фильтр по Статусу на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
