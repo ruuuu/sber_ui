@@ -6,7 +6,7 @@ module.exports = {
       {
         filename: 'report.html',
         expand: true,
-        pageTitle: 'AomiReport'
+        pageTitle: 'BankReport'
       }
     ]
   ],

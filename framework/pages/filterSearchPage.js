@@ -1,3 +1,6 @@
+import supertest from 'supertest'; // используем библиотеку supertest
+import { app } from './index.js'; 
+
 const FilterSearchPage = function() { 
 
   const poiskButton = ('div>div>div>div:nth-child(1)>div>div:nth-child(4)>div>div'); // кнпока Лупа
@@ -10,16 +13,7 @@ const FilterSearchPage = function() {
 
   const filterButtonForInnAtRequests = ('table>thead>tr>th:nth-child(4)>div>div>div:nth-child(2)>div:nth-child(2)');// треугольничек для фильра по инн на вкладке Запросы
 
-  const filterButtonForStatusAtRequests = ('table>thead>tr>th:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(2)'); //  треугольничек для фильтра по статусу на вкладке Запросы
-
-  const statusCheckbox = ('html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>label>div:nth-child(2)');
-  //input[type="checkbox"]
-
-  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
-  // /html/body/div[2]/div/div/div[2]/div[2]/label/div[2]
-  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[1]
-  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
-
+  
 
 
   this.searchTaxpayerByInnAtTaxpayers = async function (page, inn){   // поиск по ИНН на вкладке НП
@@ -71,22 +65,39 @@ const FilterSearchPage = function() {
 
 
 
-  
+
+  this.filterByStatusAtRequests = async function (url, statusRequest){  // фильтр по Статусу на вкладке Запросы, пока не получилось
+
+     const data = { // входные данные 
+      grant_type: "password",
+      password: String(app().data()[0].password), 
+      username: String(app().data()[0].email) 
+    };
+
+    const rr = await supertest(url) // 'https://sber.cprr-dev.weintegrator.com'
+      .post('/api/v0/vst-oauth2/oauth/token') 
+      .set('Authorization', `Basic ZGVtby1jbGllbnQ6c2VjcmV0`) 
+      .send(data);
+
+    const token = rr.body.access_token;  
+    //console.log('token = ', token);
 
 
-  this.filterByStatusAtRequests = async function (page){  // фильтр по Статусу на вкладке Запросы, пока ене получилось
-
-    await page.click(requests); // переходим на  вкладку Запросы
-
-    await page.click(filterButtonForStatusAtRequests); // жмем на треугльник статуса
-
-    // const statusArray = ['Подтвержден', 'Ошибка', 'Обработка', 'Отклонен'];
-    // const randStatusIndex = Math.floor(Math.random() * statusArray.length); // берем рандомный статус
-    // console.log('randStatusIndex ', randStatusIndex);
+    const r = await supertest(url) // 'https://sber.cprr-dev.weintegrator.com'
+        .get('/api/v0/tpf-bank/taxpayers/requests') 
+        .query({ page: 0, size: 20, status: statusRequest }) // передаем query парметры
+        .set('Authorization', `Bearer ${token}`); 
     
-    
-    //await page.check(statusCheckbox);   // жмем чекбокс
-    await page.click(statusCheckbox);
+    //console.log('r.body ', r.body);    
+
+    let arrayStatus = [];
+    for(let i = 0; i < r.body.content.length; i++){
+      arrayStatus.push(r.body.content[i].status); // заполняем массив
+    }
+
+    console.log('arrayStatus ', arrayStatus);
+
+    return arrayStatus;
   };
 
 

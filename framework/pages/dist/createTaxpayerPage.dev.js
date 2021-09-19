@@ -10,7 +10,7 @@ var CreateTaxpayerPage = function CreateTaxpayerPage() {
 
   var innField = '[data-field-name = "inn"]'; // поле ввода ИНН
 
-  var checkButton = 'text="Найти"'; //  кнопка  Найти(check) form>div>div:nth-child(2)>button
+  var checkButton = 'text="Найти"'; //  кнопка  Найти(check) 
 
   var prodolgitButton = 'text="Продолжить"'; // кнопка Продолжить
 

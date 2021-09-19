@@ -29,8 +29,8 @@ it('Создание НП-10 значный', async () => {
 
     await app().loginPage().login(page, email, password); 
 
-    const masInn = arrayInnYrLiso(); // массив УНИКАЛЬНЫХ рандомных  10 значных инн
-    console.log('masInn ', masInn);
+    const masInn = arrayInnYrLiso(); // массив НОВЫХ 10-значных инн
+    //console.log('masInn ', masInn);
     
     let inn = masInn[Math.floor(Math.random() * masInn.length)]; // рандомный инн 
     //console.log('рандомный inn: ', inn);
@@ -70,15 +70,15 @@ it('Создание НП-10 значный', async () => {
 
 
 
-it('Создание НП-12 значный', async () => { // 
+it('Создание НП-12 значный', async () => {  
 
     const email = await app().data()[0].email; 
 
     const password = await app().data()[0].password;
     
-    const masInn = arrayInnIP(); // Рандомно выбирать потом из массива 12- значных УНИКАЛЬНЫХ
+    const masInn = arrayInnIP(); //  массив НОВЫХ  12- значных ИНН
 
-    let inn = masInn[Math.floor(Math.random() * masInn.length)]; // рандомный инн 
+    let inn = masInn[Math.floor(Math.random() * masInn.length)]; 
 
     await app().loginPage().login(page, email, password); 
     
@@ -98,6 +98,12 @@ it('Создание НП-12 значный', async () => { //
     // Статус:  
     const cellStatus = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); //ячейка где хранится Статус (в гриде, на вкладке Зарпосы)  
     const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
+
+    await page.waitForSelector(locator) 
+        .then(
+            () => console.log('Загрузился элемент'),
+        );
+
     expect(cellStatusText)
       .to
       .have
@@ -121,8 +127,8 @@ it('Создание НП, который уже есть в системе', as
   const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
   //console.log('inn: ', inn);
 
-  const email = await app().data()[1].email; 
-  const password = await app().data()[1].password;
+  const email = await app().data()[0].email; 
+  const password = await app().data()[0].password;
 
   await app().loginPage().login(page, email, password); 
   
@@ -241,53 +247,27 @@ it('Фильтр по ИНН на вкладке Запросы', async () => {
 });
 
 
-it('Фильтр по Статусу на вкладке Запросы', async () => { // ПОКА НЕ ПОЛУЧАЕТСЯ
+it('Фильтр по Статус на вкладке Запросы', async () => { 
 
+  const statuses = ['PENDING', 'ACCEPTED', 'DECLINED', 'ERROR'];
+  let statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
+  console.log('statusRequest ', statusRequest);
 
-  const email = await app().data()[0].email; 
-  const password = await app().data()[0].password;
-
-  await app().loginPage().login(page, email, password); // вызов метода login
-
-  await app().filterSearchPage().filterByStatusAtRequests(page); // вызов метода фильтрации пос татусу, пердаем стаутс
+  const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(urlSber, statusRequest); // вызов метода фильтрации пос татусу, пердаем стаутс
   
+  for(let i = 0; i < arrayStatus.length; i++){
+    expect(arrayStatus[i]).to.equal(statusRequest);
+  }
   
-  // const statusCell = await app().locatorPage().getLocator('table/tbody/tr[2]/td[2]/div/div'); // в гриде, на вкладке Запросы, ячейка где хранится Статус
-  // console.log('statusCell ', statusCell);
-  // const statusCellText = await app().locatorPage().getElement(page, statusCell);
-  // expect(statusCellText)
-  //   .to
-  //   .have
-  //   .string(randStatus);
+  if(arrayStatus.length === 0){
+    expect(arrayStatus.length).to.equal(0);
+  }
 
 });
 
 
 
 
-// // table/tbody/tr[2]/td[2]/div/div
-// // table/tbody/tr[3]/td[2]/div/div
-// // table/tbody/tr[4]/td[2]/div/div
-// // 
-// let masStatuses = [];
-
-// for(let i=0; i< 10; i++){
-//   expect((table/tbody/tr[i]/td[2]/div/div).textContent)
-//     .to
-//     .have
-//     .string('Подтвержден');
-
-// }
-
-// // masStatuse = ['Потдвержден', 'Обработка', 'Подтвержедн'];
-
-// for(let i=0; i< 10; i++){
-//   if(masStatuse[i] === 'Подтвержден'){
-
-//   }
-
-
-// }
 
 
 // Создаем НП, жме мна него, открывается окно, идем в История запрсов

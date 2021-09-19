@@ -70,53 +70,53 @@ it('Создание НП-10 значный', function _callee3() {
           return regeneratorRuntime.awrap((0, _index.app)().loginPage().login(page, email, password));
 
         case 8:
-          masInn = (0, _data.arrayInnYrLiso)(); // массив УНИКАЛЬНЫХ рандомных  10 значных инн
+          masInn = (0, _data.arrayInnYrLiso)(); // массив НОВЫХ 10-значных инн
+          //console.log('masInn ', masInn);
 
-          console.log('masInn ', masInn);
           inn = masInn[Math.floor(Math.random() * masInn.length)]; // рандомный инн 
           //console.log('рандомный inn: ', inn);
 
-          _context3.next = 13;
+          _context3.next = 12;
           return regeneratorRuntime.awrap((0, _index.app)().createTaxpayerPage().createTaxpayer(page, inn));
 
-        case 13:
-          _context3.next = 15;
+        case 12:
+          _context3.next = 14;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'));
 
-        case 15:
+        case 14:
           cellInn = _context3.sent;
-          _context3.next = 18;
+          _context3.next = 17;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getElement(page, cellInn));
 
-        case 18:
+        case 17:
           cellInnText = _context3.sent;
           expect(cellInnText).to.have.string(inn); // Активность:  
 
-          _context3.next = 22;
+          _context3.next = 21;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(3)>div'));
 
-        case 22:
+        case 21:
           cellActivity = _context3.sent;
-          _context3.next = 25;
+          _context3.next = 24;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getElement(page, cellActivity));
 
-        case 25:
+        case 24:
           cellActivityText = _context3.sent;
           expect(cellActivityText).to.have.string('Получение карты сведений о НП'); // Статус:  
 
-          _context3.next = 29;
+          _context3.next = 28;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'));
 
-        case 29:
+        case 28:
           cellStatus = _context3.sent;
-          _context3.next = 32;
+          _context3.next = 31;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getElement(page, cellStatus));
 
-        case 32:
+        case 31:
           cellStatusText = _context3.sent;
           expect(cellStatusText).to.have.string('Обработка'); // Подтвержден
 
-        case 34:
+        case 33:
         case "end":
           return _context3.stop();
       }
@@ -139,10 +139,9 @@ it('Создание НП-12 значный', function _callee4() {
 
         case 5:
           password = _context4.sent;
-          masInn = (0, _data.arrayInnIP)(); // Рандомно выбирать потом из массива 12- значных УНИКАЛЬНЫХ
+          masInn = (0, _data.arrayInnIP)(); //  массив НОВЫХ  12- значных ИНН
 
-          inn = masInn[Math.floor(Math.random() * masInn.length)]; // рандомный инн 
-
+          inn = masInn[Math.floor(Math.random() * masInn.length)];
           _context4.next = 10;
           return regeneratorRuntime.awrap((0, _index.app)().loginPage().login(page, email, password));
 
@@ -173,22 +172,28 @@ it('Создание НП-12 значный', function _callee4() {
 
         case 24:
           cellStatusText = _context4.sent;
+          _context4.next = 27;
+          return regeneratorRuntime.awrap(page.waitForSelector(locator).then(function () {
+            return console.log('Загрузился элемент');
+          }));
+
+        case 27:
           expect(cellStatusText).to.have.string('Обработка'); //Подтвержден
           // Активность:  
 
-          _context4.next = 28;
+          _context4.next = 30;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(3)>div'));
 
-        case 28:
+        case 30:
           cellActivity = _context4.sent;
-          _context4.next = 31;
+          _context4.next = 33;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getElement(page, cellActivity));
 
-        case 31:
+        case 33:
           cellActivityText = _context4.sent;
           expect(cellActivityText).to.have.string('Получение карты сведений о НП');
 
-        case 33:
+        case 35:
         case "end":
           return _context4.stop();
       }
@@ -209,12 +214,12 @@ it('Создание НП, который уже есть в системе', fu
           inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; //console.log('inn: ', inn);
 
           _context5.next = 6;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[1].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
 
         case 6:
           email = _context5.sent;
           _context5.next = 9;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[1].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
 
         case 9:
           password = _context5.sent;
@@ -451,49 +456,34 @@ it('Фильтр по ИНН на вкладке Запросы', function _call
     }
   });
 });
-it('Фильтр по Статусу на вкладке Запросы', function _callee10() {
-  var email, password;
+it('Фильтр по Статус на вкладке Запросы', function _callee10() {
+  var statuses, statusRequest, arrayStatus, i;
   return regeneratorRuntime.async(function _callee10$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
-          _context10.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
-
-        case 2:
-          email = _context10.sent;
+          statuses = ['PENDING', 'ACCEPTED', 'DECLINED', 'ERROR'];
+          statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
+          console.log('statusRequest ', statusRequest);
           _context10.next = 5;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().filterSearchPage().filterByStatusAtRequests(_index.urlSber, statusRequest));
 
         case 5:
-          password = _context10.sent;
-          _context10.next = 8;
-          return regeneratorRuntime.awrap((0, _index.app)().loginPage().login(page, email, password));
+          arrayStatus = _context10.sent;
+
+          // вызов метода фильтрации пос татусу, пердаем стаутс
+          for (i = 0; i < arrayStatus.length; i++) {
+            expect(arrayStatus[i]).to.equal(statusRequest);
+          }
+
+          if (arrayStatus.length === 0) {
+            expect(arrayStatus.length).to.equal(0);
+          }
 
         case 8:
-          _context10.next = 10;
-          return regeneratorRuntime.awrap((0, _index.app)().filterSearchPage().filterByStatusAtRequests(page));
-
-        case 10:
         case "end":
           return _context10.stop();
       }
     }
   });
-}); // // table/tbody/tr[2]/td[2]/div/div
-// // table/tbody/tr[3]/td[2]/div/div
-// // table/tbody/tr[4]/td[2]/div/div
-// // 
-// let masStatuses = [];
-// for(let i=0; i< 10; i++){
-//   expect((table/tbody/tr[i]/td[2]/div/div).textContent)
-//     .to
-//     .have
-//     .string('Подтвержден');
-// }
-// // masStatuse = ['Потдвержден', 'Обработка', 'Подтвержедн'];
-// for(let i=0; i< 10; i++){
-//   if(masStatuse[i] === 'Подтвержден'){
-//   }
-// }
-// Создаем НП, жме мна него, открывается окно, идем в История запрсов
+}); // Создаем НП, жме мна него, открывается окно, идем в История запрсов

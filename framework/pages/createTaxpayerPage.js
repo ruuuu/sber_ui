@@ -2,7 +2,7 @@ const CreateTaxpayerPage = function() {
 
   const createTaxpayerButton = ('text="Создать карточку"'); // кнопка "Создать карточку"    
   const innField = ('[data-field-name = "inn"]'); // поле ввода ИНН
-  const checkButton = ('text="Найти"'); //  кнопка  Найти(check) form>div>div:nth-child(2)>button
+  const checkButton = ('text="Найти"'); //  кнопка  Найти(check) 
   const prodolgitButton = ('text="Продолжить"'); // кнопка Продолжить
   const queryTab = ('text="Заявки на получение сведений"'); // вкладка  Запросы
   const innTab = ('text="Налогоплательщики"'); // вкладка Налогоплательщики

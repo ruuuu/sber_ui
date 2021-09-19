@@ -5,6 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.FilterSearchPage = void 0;
 
+var _supertest = _interopRequireDefault(require("supertest"));
+
+var _index = require("./index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+// используем библиотеку supertest
 var FilterSearchPage = function FilterSearchPage() {
   var poiskButton = 'div>div>div>div:nth-child(1)>div>div:nth-child(4)>div>div'; // кнпока Лупа
 
@@ -18,14 +25,6 @@ var FilterSearchPage = function FilterSearchPage() {
   var applyButton = 'text="Применить"'; // кнопка Применить
 
   var filterButtonForInnAtRequests = 'table>thead>tr>th:nth-child(4)>div>div>div:nth-child(2)>div:nth-child(2)'; // треугольничек для фильра по инн на вкладке Запросы
-
-  var filterButtonForStatusAtRequests = 'table>thead>tr>th:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(2)'; //  треугольничек для фильтра по статусу на вкладке Запросы
-
-  var statusCheckbox = 'html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>label>div:nth-child(2)'; //input[type="checkbox"]
-  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
-  // /html/body/div[2]/div/div/div[2]/div[2]/label/div[2]
-  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[1]
-  // /html/body/div[2]/div/div/div[2]/div[1]/label/div[2]
 
   this.searchTaxpayerByInnAtTaxpayers = function _callee(page, inn) {
     return regeneratorRuntime.async(function _callee$(_context) {
@@ -127,23 +126,49 @@ var FilterSearchPage = function FilterSearchPage() {
     });
   };
 
-  this.filterByStatusAtRequests = function _callee5(page) {
+  this.filterByStatusAtRequests = function _callee5(url, statusRequest) {
+    var data, rr, token, r, arrayStatus, i;
     return regeneratorRuntime.async(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            _context5.next = 2;
-            return regeneratorRuntime.awrap(page.click(requests));
+            // фильтр по Статусу на вкладке Запросы, пока не получилось
+            data = {
+              // входные данные 
+              grant_type: "password",
+              password: String((0, _index.app)().data()[0].password),
+              username: String((0, _index.app)().data()[0].email)
+            };
+            _context5.next = 3;
+            return regeneratorRuntime.awrap((0, _supertest["default"])(url) // 'https://sber.cprr-dev.weintegrator.com'
+            .post('/api/v0/vst-oauth2/oauth/token').set('Authorization', "Basic ZGVtby1jbGllbnQ6c2VjcmV0").send(data));
 
-          case 2:
-            _context5.next = 4;
-            return regeneratorRuntime.awrap(page.click(filterButtonForStatusAtRequests));
+          case 3:
+            rr = _context5.sent;
+            token = rr.body.access_token; //console.log('token = ', token);
 
-          case 4:
-            _context5.next = 6;
-            return regeneratorRuntime.awrap(page.click(statusCheckbox));
+            _context5.next = 7;
+            return regeneratorRuntime.awrap((0, _supertest["default"])(url) // 'https://sber.cprr-dev.weintegrator.com'
+            .get('/api/v0/tpf-bank/taxpayers/requests').query({
+              page: 0,
+              size: 20,
+              status: statusRequest
+            }) // передаем query парметры
+            .set('Authorization', "Bearer ".concat(token)));
 
-          case 6:
+          case 7:
+            r = _context5.sent;
+            //console.log('r.body ', r.body);    
+            arrayStatus = [];
+
+            for (i = 0; i < r.body.content.length; i++) {
+              arrayStatus.push(r.body.content[i].status); // заполняем массив
+            }
+
+            console.log('arrayStatus ', arrayStatus);
+            return _context5.abrupt("return", arrayStatus);
+
+          case 12:
           case "end":
             return _context5.stop();
         }
