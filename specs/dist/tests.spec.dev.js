@@ -13,6 +13,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 // для expect
 var expect = _chai["default"].expect;
 var page;
+var url = _index.urlVtb; // здесь меняем на нужный урл
+
+var i = 1; //  (для сбера 0, 1 для втб)
+
 beforeEach(function _callee() {
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
@@ -23,7 +27,7 @@ beforeEach(function _callee() {
 
         case 2:
           _context.next = 4;
-          return regeneratorRuntime.awrap((0, _browser["goto"])(_index.urlSber + '/login'));
+          return regeneratorRuntime.awrap((0, _browser["goto"])(url + '/login'));
 
         case 4:
           page = _context.sent;
@@ -57,12 +61,12 @@ it('Создание НП-10 значный', function _callee3() {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 2:
           email = _context3.sent;
           _context3.next = 5;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 5:
           password = _context3.sent;
@@ -130,12 +134,12 @@ it('Создание НП-12 значный', function _callee4() {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 2:
           email = _context4.sent;
           _context4.next = 5;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 5:
           password = _context4.sent;
@@ -172,28 +176,22 @@ it('Создание НП-12 значный', function _callee4() {
 
         case 24:
           cellStatusText = _context4.sent;
-          _context4.next = 27;
-          return regeneratorRuntime.awrap(page.waitForSelector(locator).then(function () {
-            return console.log('Загрузился элемент');
-          }));
-
-        case 27:
           expect(cellStatusText).to.have.string('Обработка'); //Подтвержден
           // Активность:  
 
-          _context4.next = 30;
+          _context4.next = 28;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(3)>div'));
 
-        case 30:
+        case 28:
           cellActivity = _context4.sent;
-          _context4.next = 33;
+          _context4.next = 31;
           return regeneratorRuntime.awrap((0, _index.app)().locatorPage().getElement(page, cellActivity));
 
-        case 33:
+        case 31:
           cellActivityText = _context4.sent;
           expect(cellActivityText).to.have.string('Получение карты сведений о НП');
 
-        case 35:
+        case 33:
         case "end":
           return _context4.stop();
       }
@@ -207,19 +205,19 @@ it('Создание НП, который уже есть в системе', fu
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(_index.urlSber));
+          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(url));
 
         case 2:
           arrayInn = _context5.sent;
           inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; //console.log('inn: ', inn);
 
           _context5.next = 6;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 6:
           email = _context5.sent;
           _context5.next = 9;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 9:
           password = _context5.sent;
@@ -257,7 +255,7 @@ it('Поиск по ИНН на вкладке НП', function _callee6() {
       switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(_index.urlSber));
+          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(url));
 
         case 2:
           arrayInn = _context6.sent;
@@ -265,12 +263,12 @@ it('Поиск по ИНН на вкладке НП', function _callee6() {
 
           console.log('inn: ', inn);
           _context6.next = 7;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 7:
           email = _context6.sent;
           _context6.next = 10;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 10:
           password = _context6.sent;
@@ -308,7 +306,7 @@ it('Поиск по ИНН на вкладке Запросы', function _callee
       switch (_context7.prev = _context7.next) {
         case 0:
           _context7.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(_index.urlSber));
+          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(url));
 
         case 2:
           arrayInn = _context7.sent;
@@ -316,12 +314,12 @@ it('Поиск по ИНН на вкладке Запросы', function _callee
 
           console.log('inn: ', inn);
           _context7.next = 7;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 7:
           email = _context7.sent;
           _context7.next = 10;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 10:
           password = _context7.sent;
@@ -359,7 +357,7 @@ it('Фильтр по ИНН на вкладке НП', function _callee8() {
       switch (_context8.prev = _context8.next) {
         case 0:
           _context8.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(_index.urlSber));
+          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(url));
 
         case 2:
           arrayInn = _context8.sent;
@@ -367,12 +365,12 @@ it('Фильтр по ИНН на вкладке НП', function _callee8() {
 
           console.log('inn: ', inn);
           _context8.next = 7;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 7:
           email = _context8.sent;
           _context8.next = 10;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 10:
           password = _context8.sent;
@@ -410,7 +408,7 @@ it('Фильтр по ИНН на вкладке Запросы', function _call
       switch (_context9.prev = _context9.next) {
         case 0:
           _context9.next = 2;
-          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(_index.urlSber));
+          return regeneratorRuntime.awrap((0, _index.app)().loginPage().getAllInn(url));
 
         case 2:
           arrayInn = _context9.sent;
@@ -418,12 +416,12 @@ it('Фильтр по ИНН на вкладке Запросы', function _call
 
           console.log('inn: ', inn);
           _context9.next = 7;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].email);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].email);
 
         case 7:
           email = _context9.sent;
           _context9.next = 10;
-          return regeneratorRuntime.awrap((0, _index.app)().data()[0].password);
+          return regeneratorRuntime.awrap((0, _index.app)().data()[i].password);
 
         case 10:
           password = _context9.sent;
@@ -457,7 +455,8 @@ it('Фильтр по ИНН на вкладке Запросы', function _call
   });
 });
 it('Фильтр по Статус на вкладке Запросы', function _callee10() {
-  var statuses, statusRequest, arrayStatus, i;
+  var statuses, statusRequest, arrayStatus, _i;
+
   return regeneratorRuntime.async(function _callee10$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
@@ -466,14 +465,14 @@ it('Фильтр по Статус на вкладке Запросы', function
           statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
           console.log('statusRequest ', statusRequest);
           _context10.next = 5;
-          return regeneratorRuntime.awrap((0, _index.app)().filterSearchPage().filterByStatusAtRequests(_index.urlSber, statusRequest));
+          return regeneratorRuntime.awrap((0, _index.app)().filterSearchPage().filterByStatusAtRequests(url, statusRequest));
 
         case 5:
           arrayStatus = _context10.sent;
 
-          // вызов метода фильтрации пос татусу, пердаем стаутс
-          for (i = 0; i < arrayStatus.length; i++) {
-            expect(arrayStatus[i]).to.equal(statusRequest);
+          // вызов метода фильтрации по cтатусу, пердаем стаутс
+          for (_i = 0; _i < arrayStatus.length; _i++) {
+            expect(arrayStatus[_i]).to.equal(statusRequest);
           }
 
           if (arrayStatus.length === 0) {

@@ -25,8 +25,8 @@ const LoginPage = function(){
     
     const dataToGetInn = { // входные данные 
       grant_type: "password",
-      password: String(app().data()[0].password), 
-      username: String(app().data()[0].email) 
+      password: String(app().data()[1].password), 
+      username: String(app().data()[1].email) 
     };
 
     const rr = await supertest(url) // 'https://sber.cprr-dev.weintegrator.com'

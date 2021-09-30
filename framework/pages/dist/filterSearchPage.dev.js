@@ -136,8 +136,8 @@ var FilterSearchPage = function FilterSearchPage() {
             data = {
               // входные данные 
               grant_type: "password",
-              password: String((0, _index.app)().data()[0].password),
-              username: String((0, _index.app)().data()[0].email)
+              password: String((0, _index.app)().data()[1].password),
+              username: String((0, _index.app)().data()[1].email)
             };
             _context5.next = 3;
             return regeneratorRuntime.awrap((0, _supertest["default"])(url) // 'https://sber.cprr-dev.weintegrator.com'

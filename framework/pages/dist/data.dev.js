@@ -22,7 +22,7 @@ var dataGenerate = function dataGenerate() {
 exports.dataGenerate = dataGenerate;
 
 var arrayInnYrLiso = function arrayInnYrLiso() {
-  var arrayYrLisoInn = ['1659121320', '1661031994']; // массив ИНН для создания Юр лиц(10-значные) 
+  var arrayYrLisoInn = ['2808021189', '5009033419', '4401135041', '3232005484', '0277105194']; // массив ИНН для создания Юр лиц(10-значные) 
 
   return arrayYrLisoInn;
 };
@@ -30,7 +30,7 @@ var arrayInnYrLiso = function arrayInnYrLiso() {
 exports.arrayInnYrLiso = arrayInnYrLiso;
 
 var arrayInnIP = function arrayInnIP() {
-  var arrayIpInn = ['100101078951', '600100736489', '100106366738']; // массив ИНН для создания ИП(12-ти значные) 
+  var arrayIpInn = ['100401920872', '100401920872', '100200815807', '100106366738']; // массив ИНН для создания ИП(12-ти значные) 
 
   return arrayIpInn;
 };

@@ -6,10 +6,12 @@ import { arrayInnYrLiso, arrayInnIP } from '../framework/pages/data';
 
 const { expect } = chai;
 let page;
+let url = urlVtb; // здесь меняем на нужный урл
+let i = 1; //  (для сбера 0, 1 для втб)
 
 beforeEach(async () => {
   await run();
-  page = await goto(urlSber + '/login'); 
+  page = await goto(url + '/login'); // здесь указывем url стэнда 
 });
 
 afterEach(async () => {
@@ -23,9 +25,9 @@ afterEach(async () => {
 
 it('Создание НП-10 значный', async () => {
 
-    const email = await app().data()[0].email; 
+    const email = await app().data()[i].email; 
 
-    const password = await app().data()[0].password;
+    const password = await app().data()[i].password;
 
     await app().loginPage().login(page, email, password); 
 
@@ -72,9 +74,9 @@ it('Создание НП-10 значный', async () => {
 
 it('Создание НП-12 значный', async () => {  
 
-    const email = await app().data()[0].email; 
+    const email = await app().data()[i].email; 
 
-    const password = await app().data()[0].password;
+    const password = await app().data()[i].password;
     
     const masInn = arrayInnIP(); //  массив НОВЫХ  12- значных ИНН
 
@@ -97,12 +99,8 @@ it('Создание НП-12 значный', async () => {
 
     // Статус:  
     const cellStatus = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); //ячейка где хранится Статус (в гриде, на вкладке Зарпосы)  
+   
     const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
-
-    await page.waitForSelector(locator) 
-        .then(
-            () => console.log('Загрузился элемент'),
-        );
 
     expect(cellStatusText)
       .to
@@ -123,12 +121,12 @@ it('Создание НП-12 значный', async () => {
 
 it('Создание НП, который уже есть в системе', async () => { 
 
-  const arrayInn = await app().loginPage().getAllInn(urlSber);
+  const arrayInn = await app().loginPage().getAllInn(url);
   const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
   //console.log('inn: ', inn);
 
-  const email = await app().data()[0].email; 
-  const password = await app().data()[0].password;
+  const email = await app().data()[i].email; 
+  const password = await app().data()[i].password;
 
   await app().loginPage().login(page, email, password); 
   
@@ -148,13 +146,13 @@ it('Создание НП, который уже есть в системе', as
 
 it('Поиск по ИНН на вкладке НП', async () => {
 
-  const arrayInn = await app().loginPage().getAllInn(urlSber);
+  const arrayInn = await app().loginPage().getAllInn(url);
 
   const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
   console.log('inn: ', inn);
 
-  const email = await app().data()[0].email; 
-  const password = await app().data()[0].password;
+  const email = await app().data()[i].email; 
+  const password = await app().data()[i].password;
 
   await app().loginPage().login(page, email, password); // вызов метода login
 
@@ -172,13 +170,13 @@ it('Поиск по ИНН на вкладке НП', async () => {
 
 it('Поиск по ИНН на вкладке Запросы', async () => {
 
-  const arrayInn = await app().loginPage().getAllInn(urlSber);
+  const arrayInn = await app().loginPage().getAllInn(url);
 
   const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
   console.log('inn: ', inn);
 
-  const email = await app().data()[0].email; 
-  const password = await app().data()[0].password;
+  const email = await app().data()[i].email; 
+  const password = await app().data()[i].password;
 
   await app().loginPage().login(page, email, password); // вызов метода login
 
@@ -198,13 +196,13 @@ it('Поиск по ИНН на вкладке Запросы', async () => {
 
 it('Фильтр по ИНН на вкладке НП', async () => {
 
-  const arrayInn = await app().loginPage().getAllInn(urlSber);
+  const arrayInn = await app().loginPage().getAllInn(url);
 
   const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
   console.log('inn: ', inn);
 
-  const email = await app().data()[0].email; 
-  const password = await app().data()[0].password;
+  const email = await app().data()[i].email; 
+  const password = await app().data()[i].password;
 
   await app().loginPage().login(page, email, password); // вызов метода login
 
@@ -224,13 +222,13 @@ it('Фильтр по ИНН на вкладке НП', async () => {
 
 it('Фильтр по ИНН на вкладке Запросы', async () => {
 
-  const arrayInn = await app().loginPage().getAllInn(urlSber);
+  const arrayInn = await app().loginPage().getAllInn(url);
 
   const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
   console.log('inn: ', inn);
 
-  const email = await app().data()[0].email; 
-  const password = await app().data()[0].password;
+  const email = await app().data()[i].email; 
+  const password = await app().data()[i].password;
 
   await app().loginPage().login(page, email, password); // вызов метода login
 
@@ -253,7 +251,7 @@ it('Фильтр по Статус на вкладке Запросы', async ()
   let statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
   console.log('statusRequest ', statusRequest);
 
-  const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(urlSber, statusRequest); // вызов метода фильтрации пос татусу, пердаем стаутс
+  const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(url, statusRequest); // вызов метода фильтрации по cтатусу, пердаем стаутс
   
   for(let i = 0; i < arrayStatus.length; i++){
     expect(arrayStatus[i]).to.equal(statusRequest);

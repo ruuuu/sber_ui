@@ -4,8 +4,8 @@ import { dataGenerate } from './data';
 import { LocatorPage } from './locatorPage'; 
 import { FilterSearchPage  } from './filterSearchPage'; 
 
-const urlSber = 'https://sber.cprr-dev.weintegrator.com'; 
-const urlVtb = 'https://vtb.cprr-dev.weintegrator.com';
+const urlSber = 'https://sber.cprr-preprod.weintegrator.com';  // dev
+const urlVtb = 'https://vtb.cprr-preprod.weintegrator.com'; // dev
 const urlFns = 'https://fns.cprr-dev.weintegrator.com';
 
 

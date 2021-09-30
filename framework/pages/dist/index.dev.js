@@ -15,9 +15,11 @@ var _locatorPage = require("./locatorPage");
 
 var _filterSearchPage = require("./filterSearchPage");
 
-var urlSber = 'https://sber.cprr-dev.weintegrator.com';
+var urlSber = 'https://sber.cprr-preprod.weintegrator.com'; // dev
+
 exports.urlSber = urlSber;
-var urlVtb = 'https://vtb.cprr-dev.weintegrator.com';
+var urlVtb = 'https://vtb.cprr-preprod.weintegrator.com'; // dev
+
 exports.urlVtb = urlVtb;
 var urlFns = 'https://fns.cprr-dev.weintegrator.com';
 exports.urlFns = urlFns;
