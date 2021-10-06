@@ -44,7 +44,6 @@ const CreateTaxpayerPage = function() {
     await page.click(prodolgitButton); // кнпока Продолжить
 
   };  
-  
 
 
 };

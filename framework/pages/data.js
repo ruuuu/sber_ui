@@ -23,13 +23,13 @@ const dataGenerate = function(){
 
 
 const arrayInnYrLiso = function(){ 
-  const arrayYrLisoInn = [ '5030005686']; // массив ИНН для создания Юр лиц(10-значные) 
+  const arrayYrLisoInn = [ '2130111450']; // массив ИНН для создания Юр лиц(10-значные) 
   return arrayYrLisoInn;
 }
 
 const arrayInnIP = function(){  
 
-  const arrayIpInn = ['100200815807']; // массив ИНН для создания ИП(12-ти значные) 
+  const arrayIpInn = ['100106339082']; // массив ИНН для создания ИП(12-ти значные) 
   return arrayIpInn;
 }
 

@@ -1,4 +1,4 @@
-import { app, urlSber, urlVtb, urlFns } from '../framework/pages/index';
+import { app, urlSber } from '../framework/pages/index';
 import chai from 'chai'; // для expect
 import { goto, run, stop } from '../lib/browser/browser';
 import { arrayInnYrLiso, arrayInnIP } from '../framework/pages/data';
@@ -12,7 +12,7 @@ let i = 0; //  (для сбера 0, 1 для втб)
 beforeEach(async () => {
   await run();
   page = await goto(url + '/login'); //  указываем url стэнда 
-
+});
 
 afterEach(async () => {
   await stop();
@@ -264,11 +264,3 @@ it('Фильтр по Статус на вкладке Запросы', async ()
 
 
 
-
-
-
-<<<<<<< HEAD
-// Создаем НП, жмем на него, открывается окно, идем в История запросов
-=======
-// Создаем НП, жме мна него, открывается окно, идем в История запрсов
->>>>>>> 5a3e06fe0c659f07ba747da816bfe6fe09472d03
