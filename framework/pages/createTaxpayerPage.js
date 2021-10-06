@@ -1,16 +1,12 @@
 const CreateTaxpayerPage = function() { 
 
-  const createTaxpayerButton = ('html>body>div>div>div>div>div:nth-child(2)>div>div:nth-child(1)>div:nth-child(2)>div:nth-child(5)>button'); // кнопка "Звпросить данные НП"    
+  const createTaxpayerButton = ('text="Создать карточку"'); // кнопка "Создать карточку"    
   const innField = ('[data-field-name = "inn"]'); // поле ввода ИНН
-  const checkButton = ('form>div>div:nth-child(2)>button'); //  кнопка  Найти(check)
-
+  const checkButton = ('text="Найти"'); //  кнопка  Найти(check) 
   const prodolgitButton = ('text="Продолжить"'); // кнопка Продолжить
+  const queryTab = ('text="Заявки на получение сведений"'); // вкладка  Запросы
+  const innTab = ('text="Налогоплательщики"'); // вкладка Налогоплательщики
   
-  const requests = ('html>body>div>div>div>div>div:nth-child(2)>div>div:nth-child(2)>div>div:nth-child(2)'); // вкладка Запросы
-
-  // const alreadyExistInn = ('html>body>div:nth-child(2)>div>div>div:nth-child(2)>div:nth-child(1)>div'); // красное сообщение что ИНН уже есть
-
-
 
 
   this.createTaxpayer = async function (page, inn){  
@@ -22,10 +18,31 @@ const CreateTaxpayerPage = function() {
     await page.click(checkButton); // кнопка Найти
 
     await page.click(prodolgitButton); // кнпока Продолжить
- 
-  };
+
+    await page.click(queryTab); // вкладка Заявки на получение сведений(раньше была Запросы)
+    
+    const cellStatusLocator = ('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); // вернет локартор
+
+    
+    while(await page.textContent(cellStatusLocator) !== 'Подтвержден'){
+        await page.waitForTimeout(5000); // 5 сек ждем 
+    }
+  
+    };
 
 
+  this.createTaxpayerAlreadyExist = async function (page, inn){   // Создаем НП, котрый уже есть в системе
+    
+    await page.click(createTaxpayerButton); // оранжевая кнпока Запросить данные 
+
+    await page.fill(innField, inn); 
+
+    await page.click(checkButton); // кнопка Найти
+
+    await page.click(prodolgitButton); // кнпока Продолжить
+
+    };  
+  
 };
 
 export { CreateTaxpayerPage };

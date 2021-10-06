@@ -1,9 +1,9 @@
-const DataGenerate = function(){  
+const dataGenerate = function(){  
 
   const data = [ 
     {
-      email: 'sberbank', 
-      password: 'sberbank',
+      email: 'sberadmin',  
+      password: 'sberadmin', 
     },
 
     {
@@ -20,17 +20,16 @@ const DataGenerate = function(){
   return data;
 }
 
-const ArrayInnYrLiso = function(){ 
-  const arrayYrLisoInn = []; // массив ИНН для  юр лиц, брать отсюда https://rmsp-pp.nalog.ru/search.html?m=Support#t=1628447669165&sk=UL 
 
+const arrayInnYrLiso = function(){ 
+  const arrayYrLisoInn = [ '5030005686']; // массив ИНН для создания Юр лиц(10-значные) 
   return arrayYrLisoInn;
 }
 
-const ArrayInnIp = function(){  
-  const arrayIpInn = []; // массив ИНН для  ИП
-
+const arrayInnIP = function(){  
+  const arrayIpInn = ['100200815807']; // массив ИНН для создания ИП(12-ти значные) 
   return arrayIpInn;
 }
 
 
-export { DataGenerate };
+export { dataGenerate, arrayInnYrLiso, arrayInnIP };
