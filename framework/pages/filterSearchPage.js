@@ -10,7 +10,6 @@ const FilterSearchPage = function() {
   const filterButtonForInnAtTaxpayers = ('table>thead>tr>th:nth-child(1)>div>div>div:nth-child(2)>div:nth-child(2)>div'); // треугольничек для фильтра по инн на вкладке НП
   const innFiled = ('[placeholder = "Найти..."]'); 
   const applyButton = ('text="Применить"'); // кнопка Применить
-
   const filterButtonForInnAtRequests = ('table>thead>tr>th:nth-child(4)>div>div>div:nth-child(2)>div:nth-child(2)');// треугольничек для фильра по инн на вкладке Запросы
 
   
@@ -64,8 +63,6 @@ const FilterSearchPage = function() {
   };
 
 
-
-
   this.filterByStatusAtRequests = async function (url, statusRequest, j){  // фильтр по Статусу на вкладке Запросы
 
      const data = { // входные данные 
@@ -82,12 +79,10 @@ const FilterSearchPage = function() {
     const token = rr.body.access_token;  
     //console.log('token = ', token);
 
-
     const r = await supertest(url) 
         .get('/api/v0/tpf-bank/taxpayers/requests') 
         .query({ page: 0, size: 20, status: statusRequest }) // передаем query парметры
         .set('Authorization', `Bearer ${token}`); 
-    
     //console.log('r.body ', r.body);    
 
     let arrayStatus = [];
@@ -96,7 +91,6 @@ const FilterSearchPage = function() {
     }
 
     console.log('arrayStatus ', arrayStatus);
-
     return arrayStatus;
   };
 

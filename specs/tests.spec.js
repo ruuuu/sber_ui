@@ -6,13 +6,13 @@ import { arrayInnYrLiso, arrayInnIP } from '../framework/pages/data';
 
 const { expect } = chai;
 let page;
-let url = urlSber; //  меняем на нужный урл
-let i = 0; //  (для сбера 0, для втб 1)
+let url = urlSber; // здесь меняем на нужный урл
+let i = 0; //  (для сбера 0, 1 для втб)
 
 beforeEach(async () => {
   await run();
   page = await goto(url + '/login'); //  указываем url стэнда 
-});
+
 
 afterEach(async () => {
   await stop();
@@ -88,8 +88,8 @@ it('Создание НП-12 значный', async () => {
 
     
 
-    // ИНН:
-    const cellInn = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // ячейка где хранится ИНН(в гриде, на вкладке Зарпосы)          
+    // ИНН:          
+    const cellInn = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // ячейка где хранится ИНН(в гриде, на вкладке Зарпосы) 
     const cellInnText = await app().locatorPage().getElement(page, cellInn);
     expect(cellInnText)
       .to
@@ -250,6 +250,7 @@ it('Фильтр по Статус на вкладке Запросы', async ()
   console.log('statusRequest ', statusRequest);
 
   const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(url, statusRequest, i); // вызов метода фильтрации по cтатусу, пердаем стаутс
+
   
   for(let i = 0; i < arrayStatus.length; i++){
     expect(arrayStatus[i]).to.equal(statusRequest);
@@ -266,4 +267,8 @@ it('Фильтр по Статус на вкладке Запросы', async ()
 
 
 
+<<<<<<< HEAD
 // Создаем НП, жмем на него, открывается окно, идем в История запросов
+=======
+// Создаем НП, жме мна него, открывается окно, идем в История запрсов
+>>>>>>> 5a3e06fe0c659f07ba747da816bfe6fe09472d03
