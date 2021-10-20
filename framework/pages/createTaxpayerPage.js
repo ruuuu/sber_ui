@@ -11,6 +11,7 @@ const CreateTaxpayerPage = function() {
 
   this.createTaxpayer = async function (page, inn){  
     
+
     await page.click(createTaxpayerButton); 
 
     await page.fill(innField, inn); 
@@ -41,8 +42,11 @@ const CreateTaxpayerPage = function() {
 
     await page.click(prodolgitButton); 
 
-    };  
-  
+    await page.click(prodolgitButton); // кнпока Продолжить
+
+  };  
+
+
 };
 
 export { CreateTaxpayerPage };

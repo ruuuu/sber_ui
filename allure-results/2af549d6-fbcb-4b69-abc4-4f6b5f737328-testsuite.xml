@@ -1,0 +1,99 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1633553231754' stop='1633553287638'>
+    <name>specs/tests.spec.js</name>
+    <title>specs/tests.spec.js</title>
+    <test-cases>
+        <test-case start='1633553231755' status='passed' stop='1633553287637'>
+            <name>Создание НП-10 значный</name>
+            <title>Создание НП-10 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Создание НП-12 значный</name>
+            <title>Создание НП-12 значный</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Создание НП, который уже есть в системе</name>
+            <title>Создание НП, который уже есть в системе</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Поиск по ИНН на вкладке НП</name>
+            <title>Поиск по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Поиск по ИНН на вкладке Запросы</name>
+            <title>Поиск по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Фильтр по ИНН на вкладке НП</name>
+            <title>Фильтр по ИНН на вкладке НП</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Фильтр по ИНН на вкладке Запросы</name>
+            <title>Фильтр по ИНН на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+        <test-case start='1633553287637' status='undefined' stop='1633553287637'>
+            <name>Фильтр по Статус на вкладке Запросы</name>
+            <title>Фильтр по Статус на вкладке Запросы</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>This test was disabled</message>
+                <stack-trace>undefined</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
