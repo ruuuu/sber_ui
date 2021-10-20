@@ -1,17 +1,17 @@
 import { app, urlSber, urlVtb, urlFns } from '../framework/pages/index';
-import chai from 'chai'; // для expect
+import chai from 'chai'; 
 import { goto, run, stop } from '../lib/browser/browser';
 import { arrayInnYrLiso, arrayInnIP } from '../framework/pages/data';
 
 
 const { expect } = chai;
 let page;
-let url = urlSber; //  меняем на нужный урл
+let url = urlSber; 
 let i = 0; //  (для сбера 0, для втб 1)
 
 beforeEach(async () => {
   await run();
-  page = await goto(url + '/login'); //  указываем url стэнда 
+  page = await goto(url + '/login'); 
 });
 
 afterEach(async () => {
@@ -32,12 +32,11 @@ it('Создание НП-10 значный', async () => {
     await app().loginPage().login(page, email, password); 
 
     const masInn = arrayInnYrLiso(); // массив НОВЫХ 10-значных инн
-    //console.log('masInn ', masInn);
     
-    let inn = masInn[Math.floor(Math.random() * masInn.length)]; // рандомный инн 
+    let inn = masInn[Math.floor(Math.random() * masInn.length)]; 
     //console.log('рандомный inn: ', inn);
 
-    await app().createTaxpayerPage().createTaxpayer(page, inn); // вызываем метод создания НП
+    await app().createTaxpayerPage().createTaxpayer(page, inn); 
 
 
     // ИНН:                    
@@ -84,7 +83,7 @@ it('Создание НП-12 значный', async () => {
 
     await app().loginPage().login(page, email, password); 
     
-    await app().createTaxpayerPage().createTaxpayer(page, inn); // вызываем метод создания НП
+    await app().createTaxpayerPage().createTaxpayer(page, inn); 
 
     
 
@@ -128,7 +127,7 @@ it('Создание НП, который уже есть в системе', as
 
   await app().loginPage().login(page, email, password); 
   
-  await app().createTaxpayerPage().createTaxpayerAlreadyExist(page, inn); // вызываем метод создания НП
+  await app().createTaxpayerPage().createTaxpayerAlreadyExist(page, inn); 
 
   const redBlock = await app().locatorPage().getLocator('text="По данному ИНН уже создана карточка НП"'); // красное сообщение 
   const redBlockText = await app().locatorPage().getElement(page, redBlock);
@@ -146,15 +145,15 @@ it('Поиск по ИНН на вкладке НП', async () => {
 
   const arrayInn = await app().loginPage().getAllInn(url);
 
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
+  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)];
   console.log('inn: ', inn);
 
   const email = await app().data()[i].email; 
   const password = await app().data()[i].password;
 
-  await app().loginPage().login(page, email, password); // вызов метода login
+  await app().loginPage().login(page, email, password); 
 
-  await app().filterSearchPage().searchTaxpayerByInnAtTaxpayers(page, inn); // вызов метода поиска рандомного инн из системы
+  await app().filterSearchPage().searchTaxpayerByInnAtTaxpayers(page, inn);
   
   const innCell = await app().locatorPage().getLocator('table>tbody>tr>td:nth-child(1)>span'); // в гриде, на вкладке НП, ячейка где хранится ИНН 
   const innCellText = await app().locatorPage().getElement(page, innCell);
@@ -170,15 +169,15 @@ it('Поиск по ИНН на вкладке Запросы', async () => {
 
   const arrayInn = await app().loginPage().getAllInn(url);
 
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
+  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)];
   console.log('inn: ', inn);
 
   const email = await app().data()[i].email; 
   const password = await app().data()[i].password;
 
-  await app().loginPage().login(page, email, password); // вызов метода login
+  await app().loginPage().login(page, email, password);
 
-  await app().filterSearchPage().searchTaxpayerByInnAtRequests(page, inn); // вызов метода поиска по рандомноу инн из системы
+  await app().filterSearchPage().searchTaxpayerByInnAtRequests(page, inn);
   
   
   const innCell = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // в гриде, на вкладке Запросы, ячейка где хранится ИНН 
@@ -196,15 +195,15 @@ it('Фильтр по ИНН на вкладке НП', async () => {
 
   const arrayInn = await app().loginPage().getAllInn(url);
 
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
+  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
   console.log('inn: ', inn);
 
   const email = await app().data()[i].email; 
   const password = await app().data()[i].password;
 
-  await app().loginPage().login(page, email, password); // вызов метода login
+  await app().loginPage().login(page, email, password);
 
-  await app().filterSearchPage().filterTaxpayerByInnAtTaxpayers(page, inn); // вызов метода фильтрации
+  await app().filterSearchPage().filterTaxpayerByInnAtTaxpayers(page, inn); 
   
   
   const innCell = await app().locatorPage().getLocator('table>tbody>tr>td:nth-child(1)>span'); // в гриде, на вкладке НП, ячейка где хранится ИНН 
@@ -222,15 +221,14 @@ it('Фильтр по ИНН на вкладке Запросы', async () => {
 
   const arrayInn = await app().loginPage().getAllInn(url);
 
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; // рандомнм образом из  массива инн, которые есть в системе
-  console.log('inn: ', inn);
+  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
 
   const email = await app().data()[i].email; 
   const password = await app().data()[i].password;
 
-  await app().loginPage().login(page, email, password); // вызов метода login
+  await app().loginPage().login(page, email, password); 
 
-  await app().filterSearchPage().filterTaxpayerByInnAtRequests(page, inn); // вызов метода поиска
+  await app().filterSearchPage().filterTaxpayerByInnAtRequests(page, inn); 
   
   const innCell = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // в гриде, на вкладке Запросы, ячейка где хранится ИНН 
   console.log('innCell', innCell);
@@ -247,9 +245,9 @@ it('Фильтр по Статус на вкладке Запросы', async ()
 
   const statuses = ['PENDING', 'ACCEPTED', 'DECLINED', 'ERROR'];
   let statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
-  console.log('statusRequest ', statusRequest);
+  //console.log('statusRequest ', statusRequest);
 
-  const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(url, statusRequest, i); // вызов метода фильтрации по cтатусу, пердаем стаутс
+  const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(url, statusRequest, i); 
   
   for(let i = 0; i < arrayStatus.length; i++){
     expect(arrayStatus[i]).to.equal(statusRequest);

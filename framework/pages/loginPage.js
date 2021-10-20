@@ -1,4 +1,4 @@
-import supertest from 'supertest'; // используем библиотеку supertest
+import supertest from 'supertest'; 
 import { app } from './index.js'; 
 
 const LoginPage = function(){ 
@@ -9,27 +9,27 @@ const LoginPage = function(){
   const linkTpf = ('a[href="/tpf"]'); // жмем на плашку Кред досье
   
   
-  this.login = async function (page, name, password){  // метод Логин
+  this.login = async function (page, name, password){  
     await page.fill(loginField, name);  
 
     await page.fill(passwordField, password); 
     
-    await page.click(loginButton); // кликаем кнопку Логин
+    await page.click(loginButton); 
 
-    await page.click(linkTpf); // жмем на плашку Досье налогоплателщика
+    await page.click(linkTpf); 
   };
 
 
 
   this.getAllInn = async function (url){  // выдает массив ИНН, котрые есть в системе
     
-    const dataToGetInn = { // входные данные 
+    const dataToGetInn = { 
       grant_type: "password",
       password: String(app().data()[1].password), 
       username: String(app().data()[1].email) 
     };
 
-    const rr = await supertest(url) // 'https://sber.cprr-dev.weintegrator.com'
+    const rr = await supertest(url) 
       .post('/api/v0/vst-oauth2/oauth/token') 
       .set('Authorization', `Basic ZGVtby1jbGllbnQ6c2VjcmV0`) 
       .send(dataToGetInn);
@@ -38,9 +38,9 @@ const LoginPage = function(){
     console.log('token = ', token);
 
 
-    const r = await supertest(url) // 'https://sber.cprr-dev.weintegrator.com'
+    const r = await supertest(url) 
         .get('/api/v0/tpf-bank/taxpayers') 
-        .query({ page: 0, size: 20 }) // передаем query парметры
+        .query({ page: 0, size: 20 }) 
         .set('Authorization', `Bearer ${token}`); 
     
     //console.log('r.body ', r.body);    
@@ -48,7 +48,7 @@ const LoginPage = function(){
 
     let arrayInn = [];
     for(let i = 0; i < r.body.content.length; i++){
-      arrayInn.push(r.body.content[i].taxpayerInn); // заполняем массив
+      arrayInn.push(r.body.content[i].taxpayerInn); 
     }
 
     //console.log('arrayInn: ', arrayInn); // массив ИНН котые есть в системе

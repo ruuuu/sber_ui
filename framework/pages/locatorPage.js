@@ -13,7 +13,7 @@ const LocatorPage = function() {
             () => console.log('Загрузился элемент'),
         );
 
-      const elemText = await page.textContent(locator); // текст элемента получаем
+      const elemText = await page.textContent(locator); 
       return elemText;
   };
 }

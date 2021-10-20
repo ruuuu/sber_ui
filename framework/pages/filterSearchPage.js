@@ -18,7 +18,7 @@ const FilterSearchPage = function() {
 
   this.searchTaxpayerByInnAtTaxpayers = async function (page, inn){   // поиск по ИНН на вкладке НП
     
-    await page.click(poiskButton); // жмем на кнопку Лупы
+    await page.click(poiskButton); 
 
     await page.fill(searchInnField, inn); 
 
@@ -28,12 +28,12 @@ const FilterSearchPage = function() {
 
   this.filterTaxpayerByInnAtTaxpayers = async function (page, inn){  // фильтр по Инн на вкладке НП
     
-    await page.click(filterButtonForInnAtTaxpayers); // на треугольничек жмем
+    await page.click(filterButtonForInnAtTaxpayers); 
 
-    await page.fill(innFiled, '');  // очищвем поле
+    await page.fill(innFiled, '');  
     await page.fill(innFiled, inn); 
 
-    await page.click(applyButton);  // жмем Применить
+    await page.click(applyButton);  
     
   };
 
@@ -41,11 +41,11 @@ const FilterSearchPage = function() {
 
   this.searchTaxpayerByInnAtRequests = async function (page, inn){   // поиск по ИНН на вкладке Запросы
 
-    await page.click(requests); // переходим на  вкладку Запросы
+    await page.click(requests); 
     
-    await page.click(poiskButton); // жме мна кнопку Лупы
+    await page.click(poiskButton); 
 
-    await page.fill(searchInnField, inn); // вбиваем Инн в поле поиска
+    await page.fill(searchInnField, inn);
     
   };
 
@@ -53,13 +53,13 @@ const FilterSearchPage = function() {
   
   this.filterTaxpayerByInnAtRequests = async function (page, inn){  // фильтр по Инн на вкладке Запросы
 
-    await page.click(requests); // переходим на  вкладку Запросы
+    await page.click(requests); 
 
-    await page.click(filterButtonForInnAtRequests); // на треугольничек жмем
+    await page.click(filterButtonForInnAtRequests); 
 
     await page.fill(innFiled, inn); 
 
-    await page.click(applyButton);  // жмем Применить
+    await page.click(applyButton);  
     
   };
 
@@ -68,7 +68,7 @@ const FilterSearchPage = function() {
 
   this.filterByStatusAtRequests = async function (url, statusRequest, j){  // фильтр по Статусу на вкладке Запросы
 
-     const data = { // входные данные 
+    const data = { 
       grant_type: "password",
       password: String(app().data()[j].password), 
       username: String(app().data()[j].email) 
@@ -85,14 +85,14 @@ const FilterSearchPage = function() {
 
     const r = await supertest(url) 
         .get('/api/v0/tpf-bank/taxpayers/requests') 
-        .query({ page: 0, size: 20, status: statusRequest }) // передаем query парметры
+        .query({ page: 0, size: 20, status: statusRequest }) 
         .set('Authorization', `Bearer ${token}`); 
     
     //console.log('r.body ', r.body);    
 
     let arrayStatus = [];
     for(let i = 0; i < r.body.content.length; i++){
-      arrayStatus.push(r.body.content[i].status); // заполняем массив
+      arrayStatus.push(r.body.content[i].status); 
     }
 
     console.log('arrayStatus ', arrayStatus);
