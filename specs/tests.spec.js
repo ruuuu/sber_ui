@@ -1,266 +1,289 @@
-import { app, urlSber, urlVtb, urlFns } from '../framework/pages/index';
-import chai from 'chai'; 
-
+import { app } from '../framework/pages/index';
+import chai from 'chai';
 import { goto, run, stop } from '../lib/browser/browser';
-import { arrayInnYrLiso, arrayInnIP } from '../framework/pages/data';
+import { getRandomInnYrLiso, getRandomInnIP } from '../framework/pages/data';
 
+//TODO включить линтеры, а то код нечитабельный в jetbrains
 
 const { expect } = chai;
 let page;
 
-let url = urlSber; 
-let i = 0; //  (для сбера 0, для втб 1)
+let url = process.env.url;
+let i = process.env.i; //  (для сбера 0, для втб 1)
+// запускам тесты командой: url=<значение> i=<значение> npm test, пример url=https://vtb.cprr-dev.weintegrator.com i=1 npm test
 
 beforeEach(async () => {
-  await run();
-  page = await goto(url + '/login'); 
+    await run();
+    page = await goto(url + '/login');
+
 });
 
 afterEach(async () => {
-  await stop();
+    await stop();
 });
 
 
 
 
 
-
-it('Создание НП-10 значный', async () => {
-
-    const email = await app().data()[i].email; 
-
-    const password = await app().data()[i].password;
-
-    await app().loginPage().login(page, email, password); 
-
-    const masInn = arrayInnYrLiso(); // массив НОВЫХ 10-значных инн
-    
-    let inn = masInn[Math.floor(Math.random() * masInn.length)]; 
-    //console.log('рандомный inn: ', inn);
-
-    await app().createTaxpayerPage().createTaxpayer(page, inn); 
+describe('Набор тестов для создания НП', () => {
 
 
-    // ИНН:                    
-    const cellInn = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // в гриде, на вкладке Запросы, ячейка где хранится ИНН
-    const cellInnText = await app().locatorPage().getElement(page, cellInn);
-    expect(cellInnText)
-      .to
-      .have
-      .string(inn); 
+    it.skip('Создание НП-10 значный', async () => {
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
 
+        const inn = getRandomInnYrLiso();
+        console.log('рандомный innYL: ', inn);
+        await app().createTaxpayerPage().createTaxpayer(page, inn);
 
-    // Активность:  
-    const cellActivity = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(3)>div'); // в гриде, на вкладке Зарпосы, ячейка где хранится АКтивность 
-    const cellActivityText = await app().locatorPage().getElement(page, cellActivity);
-    expect(cellActivityText)
-      .to
-      .have
-      .string('Получение карты сведений о НП');   
+        //  нажать на Крестик, чтоыб закрыть картчоку НП (Попросить Матвея проставить id шник кресткиу)
+        const closeButton = ('div:nth-child(4)>div>div>div:nth-child(1)>div:nth-child(2)>svg');
+        await page.click(closeButton);
 
 
 
-    // Статус:  
-    const cellStatus = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); // в гриде, на вкладке Зарпосы, ячейка где хранится Статус   
-    const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
-    expect(cellStatusText)
-      .to
-      .have
-      .string('Подтвержден');  
-
-});
+        // ИНН:        
+        const cellInn = await app().locatorPage().getLocator(await app().filterSearchPage().getLocatorInnCellInRequestsTab()); // в гриде, на вкладке Запросы, ячейка где хранится ИНН
+        const cellInnText = await app().locatorPage().getElement(page, cellInn); // получаем текст элемента
+        expect(cellInnText)
+            .to
+            .have
+            .string(inn);
 
 
 
-
-it('Создание НП-12 значный', async () => {  
-
-    const email = await app().data()[i].email; 
-
-    const password = await app().data()[i].password;
-    
-    const masInn = arrayInnIP(); //  массив НОВЫХ  12- значных ИНН
-
-    let inn = masInn[Math.floor(Math.random() * masInn.length)]; 
-
-    await app().loginPage().login(page, email, password); 
-    
-    await app().createTaxpayerPage().createTaxpayer(page, inn); 
-
-    
-
-    // ИНН:          
-    const cellInn = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // ячейка где хранится ИНН(в гриде, на вкладке Зарпосы) 
-    const cellInnText = await app().locatorPage().getElement(page, cellInn);
-    expect(cellInnText)
-      .to
-      .have
-      .string(inn); 
-
-
-    // Активность:  
-    const cellActivity = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(3)>div'); // ячейка  Активность (в гриде, на вкладке Зарпосы)  
-    const cellActivityText = await app().locatorPage().getElement(page, cellActivity);
-    expect(cellActivityText)
-      .to
-      .have
-      .string('Получение карты сведений о НП');   
-
-
-    // Статус:  
-    const cellStatus = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div'); //ячейка где хранится Статус (в гриде, на вкладке Зарпосы) 
-    const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
-    expect(cellStatusText)
-      .to
-      .have
-      .string('Подтвержден');   
-
-});
-
-
-it('Создание НП, который уже есть в системе', async () => { 
-
-  const arrayInn = await app().loginPage().getAllInn(url);
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
-  //console.log('inn: ', inn);
-
-  const email = await app().data()[i].email; 
-  const password = await app().data()[i].password;
-
-  await app().loginPage().login(page, email, password); 
-  
-  await app().createTaxpayerPage().createTaxpayerAlreadyExist(page, inn); 
-
-  const redBlock = await app().locatorPage().getLocator('text="По данному ИНН уже создана карточка НП"'); // красное сообщение 
-  const redBlockText = await app().locatorPage().getElement(page, redBlock);
-  
-  expect(redBlockText)
-      .to
-      .have
-      .string('По данному ИНН уже создана карточка НП'); 
-
-});
+        // Активность:  
+        const cellActivity = await app().locatorPage().getLocator(await app().createTaxpayerPage().getLocatorCellActivityInRequestsTab()); // в гриде, на вкладке Зарпосы, ячейка где хранится АКтивность
+        const cellActivityText = await app().locatorPage().getElement(page, cellActivity);
+        expect(cellActivityText)
+            .to
+            .have
+            .string('Получение карты сведений о НП');
 
 
 
-it('Поиск по ИНН на вкладке НП', async () => {
+        // Статус:  
+        const cellStatus = await app().locatorPage().getLocator(await app().createTaxpayerPage().getLocatorCellStatusInRequestsTab()); // в гриде, на вкладке Зарпосы, ячейка где хранится Статус
+        const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
+        expect(cellStatusText)
+            .to
+            .have
+            .string('Подтвержден');
 
-  const arrayInn = await app().loginPage().getAllInn(url);
-
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)];
-  console.log('inn: ', inn);
-
-  const email = await app().data()[i].email; 
-  const password = await app().data()[i].password;
-
-  await app().loginPage().login(page, email, password); 
-
-  await app().filterSearchPage().searchTaxpayerByInnAtTaxpayers(page, inn);
-  
-  const innCell = await app().locatorPage().getLocator('table>tbody>tr>td:nth-child(1)>span'); // в гриде, на вкладке НП, ячейка где хранится ИНН 
-  const innCellText = await app().locatorPage().getElement(page, innCell);
-  expect(innCellText)
-    .to
-    .have
-    .string(inn);
-
-});
+    });
 
 
-it('Поиск по ИНН на вкладке Запросы', async () => {
+    it('Запрос документов', async () => {
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
 
-  const arrayInn = await app().loginPage().getAllInn(url);
 
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)];
-  console.log('inn: ', inn);
+        const inn = ('table>tbody>tr:nth-child(1)'); // первый ИНН(котрый создали в  первом тесте)
+        // table/tbody/tr[1]
 
-  const email = await app().data()[i].email; 
-  const password = await app().data()[i].password;
+        await page.click(inn);
 
-  await app().loginPage().login(page, email, password);
+        const loadButton = ('text="Загрузить"'); // кнопка Загрузить
+        await page.click(loadButton);
 
-  await app().filterSearchPage().searchTaxpayerByInnAtRequests(page, inn);
-  
-  
-  const innCell = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // в гриде, на вкладке Запросы, ячейка где хранится ИНН 
-  const innCellText = await app().locatorPage().getElement(page, innCell);
-  expect(innCellText)
-    .to
-    .have
-    .string(inn);
+
+        const loadedButtonLocator = ('text="Нет обновлений"');// задизейбленая кнопка Нет обновлений
+        const loadedButtonText = await app().locatorPage().getElement(page, loadedButtonLocator);
+        expect(loadedButtonText)
+            .to
+            .have
+            .string('Нет обновлений');
+
+        const historyRequestsTab = ('text="История заявок"');
+        await page.click(historyRequestsTab);
+
+        const statusRequestDocLocator = ('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div');
+        const statusRequestDocText = await app().locatorPage().getElement(page, statusRequestDocLocator);
+        expect(statusRequestDocText)
+            .to
+            .have
+            .string('Подтвержден');
+
+
+        //()// преходим в Грид на вкладку Запросы Заявки на получение сведений
+    });
+
+
+
+    it.skip('Создание НП-12 значный', async () => {
+
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
+
+
+        const inn = getRandomInnIP();
+        console.log('рандомный innIP: ', inn);
+        await app().createTaxpayerPage().createTaxpayer(page, inn);
+
+        //  нажать на Крестик, чтоыб закрыть картчоку НП
+
+
+        // ИНН:  
+        const cellInn = await app().locatorPage().getLocator(await app().filterSearchPage().getLocatorInnCellInRequestsTab());
+        const cellInnText = await app().locatorPage().getElement(page, cellInn);
+        expect(cellInnText)
+            .to
+            .have
+            .string(inn);
+
+
+        // Активность:   
+        const cellActivity = await app().locatorPage().getLocator(await app().createTaxpayerPage().getLocatorCellActivityInRequestsTab());
+        const cellActivityText = await app().locatorPage().getElement(page, cellActivity);
+        expect(cellActivityText)
+            .to
+            .have
+            .string('Получение карты сведений о НП');
+
+
+        // Статус:  
+        const cellStatus = await app().locatorPage().getLocator(await app().createTaxpayerPage().getLocatorCellStatusInRequestsTab());
+        const cellStatusText = await app().locatorPage().getElement(page, cellStatus);
+        expect(cellStatusText)
+            .to
+            .have
+            .string('Подтвержден');
+    });
+
+
+    it.skip('Создание НП, который уже есть в системе', async () => {
+
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
+
+        const inn = await app().loginPage().getAllInn(url, i);
+        await app().createTaxpayerPage().createTaxpayerAlreadyExist(page, inn);
+
+        const redBlock = await app().locatorPage().getLocator(await app().createTaxpayerPage().getLocatorForRedMessage());
+        const redBlockText = await app().locatorPage().getElement(page, redBlock);
+
+        expect(redBlockText)
+            .to
+            .have
+            .string('По данному ИНН уже создана карточка НП');
+    });
 
 });
 
 
+describe('Набор тестов на поиск и фильтрацию данных НП', () => {
 
-it('Фильтр по ИНН на вкладке НП', async () => {
+    it.skip('Поиск по ИНН на вкладке НП', async () => {
 
-  const arrayInn = await app().loginPage().getAllInn(url);
+        const inn = await app().loginPage().getAllInn(url, i);
+        //console.log('inn: ', inn);
 
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
-  console.log('inn: ', inn);
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
 
-  const email = await app().data()[i].email; 
-  const password = await app().data()[i].password;
+        await app().filterSearchPage().searchTaxpayerByInnAtTaxpayers(page, inn);
 
-  await app().loginPage().login(page, email, password);
+        const innCell = await app().locatorPage().getLocator(await app().filterSearchPage().getLocatorInnCellInTaxpayerTab());
+        const innCellText = await app().locatorPage().getElement(page, innCell);
+        expect(innCellText)
+            .to
+            .have
+            .string(inn);
+    });
 
-  await app().filterSearchPage().filterTaxpayerByInnAtTaxpayers(page, inn); 
-  
-  
-  const innCell = await app().locatorPage().getLocator('table>tbody>tr>td:nth-child(1)>span'); // в гриде, на вкладке НП, ячейка где хранится ИНН 
-  const innCellText = await app().locatorPage().getElement(page, innCell);
-  expect(innCellText)
-    .to
-    .have
-    .string(inn);
+
+    it.skip('Поиск по ИНН на вкладке Запросы', async () => {
+
+        const inn = await app().loginPage().getAllInn(url, i);
+        //console.log('inn: ', inn);
+
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
+
+        await app().filterSearchPage().searchTaxpayerByInnAtRequests(page, inn);
+
+
+        const innCell = await app().locatorPage().getLocator(await app().filterSearchPage().getLocatorInnCellInRequestsTab());
+        const innCellText = await app().locatorPage().getElement(page, innCell);
+        expect(innCellText)
+            .to
+            .have
+            .string(inn);
+    });
+
+
+
+    it.skip('Фильтр по ИНН на вкладке НП', async () => {
+
+        const inn = await app().loginPage().getAllInn(url, i);
+        //console.log('inn: ', inn);
+
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
+
+        await app().filterSearchPage().filterTaxpayerByInnAtTaxpayers(page, inn);
+
+        const innCell = await app().locatorPage().getLocator(await app().filterSearchPage().getLocatorInnCellInTaxpayerTab());
+
+        const innCellText = await app().locatorPage().getElement(page, innCell);
+        expect(innCellText)
+            .to
+            .have
+            .string(inn);
+    });
+
+
+
+    it.skip('Фильтр по ИНН на вкладке Запросы', async () => {
+
+        const inn = await app().loginPage().getAllInn(url, i);
+        //console.log('inn: ', inn);
+
+        const email = await app().data()[i].email;
+        const password = await app().data()[i].password;
+        await app().loginPage().login(page, email, password);
+
+        await app().filterSearchPage().filterTaxpayerByInnAtRequests(page, inn);
+
+        const innCell = await app().locatorPage().getLocator(await app().filterSearchPage().getLocatorInnCellInRequestsTab());
+
+        //console.log('innCell', innCell);
+        const innCellText = await app().locatorPage().getElement(page, innCell);
+        expect(innCellText)
+            .to
+            .have
+            .string(inn);
+    });
+
+
+    it.skip('Фильтр по Статус на вкладке Запросы', async () => {
+
+        const statuses = ['PENDING', 'ACCEPTED', 'DECLINED', 'ERROR'];
+        let statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
+        console.log('statusRequest ', statusRequest);
+
+        const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(url, statusRequest, i);
+
+        for (let i = 0; i < arrayStatus.length; i++) {
+            expect(arrayStatus[i]).to.equal(statusRequest);
+        }
+
+        if (arrayStatus.length === 0) {
+            expect(arrayStatus.length).to.equal(0);
+        }
+    });
+
+
+
 
 });
 
-
-
-it('Фильтр по ИНН на вкладке Запросы', async () => {
-
-  const arrayInn = await app().loginPage().getAllInn(url);
-
-  const inn = arrayInn[Math.floor(Math.random() * arrayInn.length)]; 
-
-  const email = await app().data()[i].email; 
-  const password = await app().data()[i].password;
-
-  await app().loginPage().login(page, email, password); 
-
-  await app().filterSearchPage().filterTaxpayerByInnAtRequests(page, inn); 
-  
-  const innCell = await app().locatorPage().getLocator('table>tbody>tr:nth-child(2)>td:nth-child(4)>div'); // в гриде, на вкладке Запросы, ячейка где хранится ИНН 
-  console.log('innCell', innCell);
-  const innCellText = await app().locatorPage().getElement(page, innCell);
-  expect(innCellText)
-    .to
-    .have
-    .string(inn);
-
-});
-
-
-it('Фильтр по Статус на вкладке Запросы', async () => { 
-
-  const statuses = ['PENDING', 'ACCEPTED', 'DECLINED', 'ERROR'];
-  let statusRequest = statuses[Math.floor(Math.random() * statuses.length)];
-  //console.log('statusRequest ', statusRequest);
-
-
-  const arrayStatus = await app().filterSearchPage().filterByStatusAtRequests(url, statusRequest, i); 
-
-  for(let i = 0; i < arrayStatus.length; i++){
-    expect(arrayStatus[i]).to.equal(statusRequest);
-  }
-  
-  if(arrayStatus.length === 0){
-    expect(arrayStatus.length).to.equal(0);
-  }
-
-});
-
-
-
+//https://habr.com/ru/post/593577/
