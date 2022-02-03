@@ -8,9 +8,7 @@ module.exports = {
                 expand: true,
                 pageTitle: 'BankReport'
             },
-            ['./node_modules/@testomatio/reporter/lib/adapter/playwright.js', {
-                apiKey: 'qzn04d563te7',
-            }]
+
         ]
     ],
 
@@ -20,7 +18,7 @@ module.exports = {
     },
     testMatch: ['**/specs/*.spec.*'],
     globals: {
-        testTimeout: 300000,
+        testTimeout: 6000,
     },
     verbose: true,
     setupFilesAfterEnv: ["jest-allure/dist/setup"]

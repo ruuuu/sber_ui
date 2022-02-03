@@ -2,6 +2,7 @@ import { app } from '../framework/pages/index';
 import chai from 'chai';
 import { goto, run, stop } from '../lib/browser/browser';
 import { getRandomInnYrLiso, getRandomInnIP } from '../framework/pages/data';
+import { createMochaInstanceAlreadyDisposedError } from 'mocha/lib/errors';
 
 //TODO включить линтеры, а то код нечитабельный в jetbrains
 
@@ -9,7 +10,7 @@ const { expect } = chai;
 let page;
 
 let url = process.env.url;
-let i = process.env.i; //  (для сбера 0, для втб 1)
+let i = process.env.i; //  (для сбера 0, для втб 1, для оператора 2)
 // запускам тесты командой: url=<значение> i=<значение> npm test, пример url=https://vtb.cprr-dev.weintegrator.com i=1 npm test
 
 beforeEach(async () => {
@@ -37,11 +38,6 @@ describe('Набор тестов для создания НП', () => {
         const inn = getRandomInnYrLiso();
         console.log('рандомный innYL: ', inn);
         await app().createTaxpayerPage().createTaxpayer(page, inn);
-
-        //  нажать на Крестик, чтоыб закрыть картчоку НП (Попросить Матвея проставить id шник кресткиу)
-        const closeButton = ('div:nth-child(4)>div>div>div:nth-child(1)>div:nth-child(2)>svg');
-        await page.click(closeButton);
-
 
 
         // ИНН:        
@@ -82,8 +78,6 @@ describe('Набор тестов для создания НП', () => {
 
 
         const inn = ('table>tbody>tr:nth-child(1)'); // первый ИНН(котрый создали в  первом тесте)
-        // table/tbody/tr[1]
-
         await page.click(inn);
 
         const loadButton = ('text="Загрузить"'); // кнопка Загрузить
@@ -102,14 +96,45 @@ describe('Набор тестов для создания НП', () => {
 
         const statusRequestDocLocator = ('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div');
         const statusRequestDocText = await app().locatorPage().getElement(page, statusRequestDocLocator);
+        console.log('statusRequestDocText ', statusRequestDocText);
+
         expect(statusRequestDocText)
             .to
             .have
-            .string('Подтвержден');
+            .string('Подтвержден'); // Проверяем  статус запроса в История заявок (в карточке)
 
 
-        //()// преходим в Грид на вкладку Запросы Заявки на получение сведений
+        const cellActivity = ('text="Получение сведений о НП"');
+        const cellActivityText = await app().locatorPage().getElement(page, cellActivity);
+        expect(cellActivityText)
+            .to
+            .have
+            .string('Получение сведений о НП');
+
+        const cellFormat = ('table>tbody>tr:nth-child(2)>td:nth-child(8)'); // table/tbody/tr[2]/td[8]
+        const cellFormatText = await app().locatorPage().getElement(page, cellFormat);
+        await expect(cellFormat).toContainText(cellFormatText);
+
+
+
+        // жмем на кнопку Крестик в карточке НП
+        const closeButton = ('#modal-close-icon'); // крестик чтобы закрыть карточку НП
+        await page.click(closeButton);
+
+        const requqestsTab = ('text="Заявки на получение сведений"');
+        await page.click(requqestsTab);
+
+
+        const statusLocator = ('table>tbody>tr:nth-child(2)>td:nth-child(2)');
+        const statusLocatorText = await app().locatorPage().getElement(page, statusLocator);
+        expect(statusLocatorText)
+            .to
+            .have
+            .string('Подтвержден'); // Проверяем  статус запроса в гриде запросов 
     });
+
+
+
 
 
 
@@ -123,8 +148,6 @@ describe('Набор тестов для создания НП', () => {
         const inn = getRandomInnIP();
         console.log('рандомный innIP: ', inn);
         await app().createTaxpayerPage().createTaxpayer(page, inn);
-
-        //  нажать на Крестик, чтоыб закрыть картчоку НП
 
 
         // ИНН:  
@@ -287,3 +310,4 @@ describe('Набор тестов на поиск и фильтрацию дан
 });
 
 //https://habr.com/ru/post/593577/
+//https://chercher.tech/playwright-js/find-elements-playwright-js - по селекторам статья

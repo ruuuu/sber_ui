@@ -6,7 +6,7 @@ const CreateTaxpayerPage = function () {
     const prodolgitButton = ('text="Продолжить"'); // оранжевая кнопка Продолжить
     const queryTab = ('text="Заявки на получение сведений"'); // вкладка  Запросы
     const innTab = ('text="Налогоплательщики"'); // вкладка Налогоплательщики
-
+    const closeButton = ('#modal-close-icon'); // крестик чтобы закрыть карточку НП
 
 
 
@@ -19,17 +19,12 @@ const CreateTaxpayerPage = function () {
         await page.click(checkButton);
 
         await page.click(prodolgitButton);
+        await page.waitForTimeout(1000); // 1 сек ждем 
 
-        await page.click('body > div > div > div > div > div:nth-child(2)'); // крестик чтобы закрыть карточку НП
+        await page.click(closeButton);
+        // await page.$eval("#modal-close-icon", e => e.click());
+        await page.click(queryTab);
 
-
-
-        // const cellStatusLocator = ('table>tbody>tr:nth-child(2)>td:nth-child(2)>div>div');
-
-        // while (await page.textContent(cellStatusLocator) !== 'Подтвержден') {
-        //     await page.waitForTimeout(30000); // 30 сек ждем 
-        //     if (await page.textContent(cellStatusLocator) === 'Подтвержден') break;
-        // }
     };
 
 
