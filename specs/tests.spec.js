@@ -81,9 +81,6 @@ describe('Набор тестов для создания НП', () => {
         // расскоментить когда пофиксят 
         // const notUpdateButtonLocator = await app().requestDocumentsPage().getLocatorNotUpdateButton(); // ('text="Нет обновлений"'); // задизейбленая кнопка Нет обновлений
         // const notUpdateButtonText = await app().locatorPage().getElement(page, notUpdateButtonLocator);
-
-
-        // как пофиксят, расскомемнтить этот блок
         // expect(notUpdateButtonText)
         //     .to
         //     .have
@@ -91,12 +88,8 @@ describe('Набор тестов для создания НП', () => {
 
 
         await app().requestDocumentsPage().historyRequest(page); // Переходим на История заявок в карточке НП
-
         const statusRequestDocLocator = await app().requestDocumentsPage().getLocatorCellStatusInHistoryRequestsTab();
-        // console.log('statusRequestDocLocator ', statusRequestDocLocator);
         const statusRequestDocText = await app().locatorPage().getElement(page, statusRequestDocLocator);
-
-        //console.log('statusRequestDocText ', statusRequestDocText);
         // как пофиксят, рассклменнтить этот блок
         // expect(statusRequestDocText)
         //     .to
@@ -104,38 +97,48 @@ describe('Набор тестов для создания НП', () => {
         //     .string('Подтвержден'); // Проверяем  статус запроса в История заявок (в карточке НП)
 
 
-        const cellActivityLocator = await app().requestDocumentsPage().getLocatorAboutTaxpayer(); // ('text="Получение сведений о НП"') в карточке НП;
+        const cellActivityLocator = await app().requestDocumentsPage().getLocatorAboutTaxpayer();
         const cellActivityText = await app().locatorPage().getElement(page, cellActivityLocator);
-
         expect(cellActivityText)
             .to
             .have
             .string('Получение сведений о НП');
 
+        // проверка формата дока:   
         const cellFormatLocator = await app().locatorPage().getLocator(await app().requestDocumentsPage().getLocatorCellFormatInHistoryRequestsTab());
         const cellFormatText = await app().locatorPage().getElement(page, cellFormatLocator);
         expect(cellFormatText).contains("PDF", "XML");
         expect(cellFormatText).to.include("PDF", "XML");
 
 
-        await app().requestDocumentsPage().validateInfoInRequestsTab(page);
+        // проверка числа загруженных доков в гриде НП:
+        const countUploadedDocLocator = ('table>tbody>tr:nth-child(1)>td:nth-child(4)')
+        const countUploadedDocText = await app().locatorPage().getElement(page, countUploadedDocLocator);
+        // как пофиксят, расскомментить этот блок:
+        // expect(countUploadedDocText)
+        //     .to
+        //     .have
+        //     .string('2 / 1'); 
 
+
+        // проверка статуса запроса дока в гриде запросов :
+        await app().requestDocumentsPage().validateInfoInRequestsTab(page);
         const statusDocRequestLocator = await app().requestDocumentsPage().getLocatorStatusDocRequestLocator();
         const statusDosRequestText = await app().locatorPage().getElement(page, statusDocRequestLocator);
         // как пофиксят, расскомментить этот блок:
         // expect(statusDosRequestText)
         //     .to
         //     .have
-        //     .string('Подтвержден'); // Проверяем  статус запроса в гриде запросов 
+        //     .string('Подтвержден'); 
 
-        // Проверяем формат дока:
+
+        // проверка формата дока в гриде запросов:
         const cellFormatInQueryRequestsLocator = await app().requestDocumentsPage().getLocatorcellFormatInQueryRequests();
         const cellFormatInQueryRequestsText = await app().locatorPage().getElement(page, cellFormatInQueryRequestsLocator);
         expect(cellFormatInQueryRequestsText).contains("PDF", "XML");
         expect(cellFormatInQueryRequestsText).to.include("PDF", "XML");
 
     });
-
 
 
 
