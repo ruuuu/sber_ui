@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import { app } from './index.js';
 
-const FilterSearchPage = function() {
+const FilterSearchPage = function () {
 
     const poiskButton = ('div>div>div>div:nth-child(1)>div>div:nth-child(4)>div>div');
     const searchInnField = ('[placeholder="Введите ИНН"]');
@@ -15,7 +15,7 @@ const FilterSearchPage = function() {
 
 
 
-    this.searchTaxpayerByInnAtTaxpayers = async function(page, inn) { // поиск по ИНН на вкладке НП
+    this.searchTaxpayerByInnAtTaxpayers = async function (page, inn) { // поиск по ИНН на вкладке НП
 
         await page.click(poiskButton);
 
@@ -25,11 +25,12 @@ const FilterSearchPage = function() {
 
 
 
-    this.filterTaxpayerByInnAtTaxpayers = async function(page, inn) { // фильтр по Инн на вкладке НП
+    this.filterTaxpayerByInnAtTaxpayers = async function (page, inn) { // фильтр по Инн на вкладке НП
 
         await page.click(filterButtonForInnAtTaxpayers);
 
         await page.fill(innFiled, '');
+
         await page.fill(innFiled, inn);
 
         await page.click(applyButton);
@@ -38,7 +39,7 @@ const FilterSearchPage = function() {
 
 
 
-    this.searchTaxpayerByInnAtRequests = async function(page, inn) { // поиск по ИНН на вкладке Запросы
+    this.searchTaxpayerByInnAtRequests = async function (page, inn) { // поиск по ИНН на вкладке Запросы
 
         await page.click(requests);
 
@@ -50,7 +51,7 @@ const FilterSearchPage = function() {
 
 
 
-    this.filterTaxpayerByInnAtRequests = async function(page, inn) { // фильтр по Инн на вкладке Запросы
+    this.filterTaxpayerByInnAtRequests = async function (page, inn) { // фильтр по Инн на вкладке Запросы
 
         await page.click(requests);
 
@@ -63,7 +64,7 @@ const FilterSearchPage = function() {
     };
 
 
-    this.filterByStatusAtRequests = async function(url, statusRequest, j) { // фильтр по Статусу на вкладке Запросы
+    this.filterByStatusAtRequests = async function (url, statusRequest, j) { // фильтр по Статусу на вкладке Запросы
 
         const data = {
             grant_type: "password",
@@ -94,19 +95,15 @@ const FilterSearchPage = function() {
     };
 
 
-    this.getLocatorInnCellInTaxpayerTab = async function() {
+    this.getLocatorInnCellInTaxpayerTab = async function () {
         const innLocator = ('table>tbody>tr>td:nth-child(1)>span');
         return innLocator;
     }
 
-    this.getLocatorInnCellInRequestsTab = async function() {
+    this.getLocatorInnCellInRequestsTab = async function () {
         const innLocator = ('table>tbody>tr:nth-child(2)>td:nth-child(4)>div');
         return innLocator;
     }
-
-
-
-
 
 };
 
